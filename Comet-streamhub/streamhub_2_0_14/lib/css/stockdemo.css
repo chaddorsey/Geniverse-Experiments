@@ -1,0 +1,16 @@
+td, th {
+	font-family: Arial,verdana;
+	font-size: 10pt;
+}
+
+td {
+	padding: 5px;
+}
+
+th {
+	padding: 5px;
+}
+
+.price, .change {
+	text-align: right;
+}
