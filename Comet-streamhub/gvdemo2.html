@@ -1,0 +1,127 @@
+<html>
+  <head>
+	<title>Applet Test Including Comet Chat with StreamHub</title>
+	<link rel="stylesheet" href="jquery.jgrowl.css" type="text/css" />
+	<script src="streamhub-min.js"></script>
+	<script type="text/javascript" src="library.js"></script>
+	<script type="text/javascript" src="jquery-1.4.js"></script>
+	<script type="text/javascript" src="jGrowl-1.2.4/jquery.jgrowl.js"></script>
+    <script type="text/javascript">
+      function getApplet() {
+        return document.getElementById("chromosome");
+      }
+
+      function getLocalObject(localId) {
+        var applet = getApplet();
+        return applet.getOTrunk().getOTObject(applet.getID(localId));
+      }
+
+      function componentForObject(localId) {
+        var applet = getApplet();
+        var obj = getLocalObject(localId);
+        return applet.getOTContainer().getView().getJComponentService().getJComponentViewContext().getComponentByObject(obj);
+      }
+
+      // print the allele string
+      function test() {
+        // this should return a StaticOrganismView
+        var staticOrgView = componentForObject("static");
+        org = staticOrgView.getOrganism();
+        alert("Allele String: " + org.getAlleleString());
+      }
+      function reloadApplet() {
+        var applet = getApplet();
+        applet.getOTContainer().reloadView();
+      }
+
+      // change the current organism
+      function test2() {
+        var applet = getApplet();
+        femaleOrg = getLocalObject("femaleOrganism");
+        staticOrg = getLocalObject("static");
+        chromosome = getLocalObject("chromosome");
+        staticOrg.setOrganism(femaleOrg);
+        chromosome.setOrganism(femaleOrg);
+        reloadApplet();
+      }
+	function useChild() {
+		var applet = getApplet();
+		receivedOrg = data.message();
+		staticOrg = getLocalObject("static");
+		chromosome = getLocalObject("chromosome");
+		staticOrg.setOrganism(receivedOrg);
+		chromosome.setOrganism(receivedOrg);
+		reloadApplet();
+	}
+	
+    </script>
+  </head>
+  <body>
+    <h1>Biologica side-by-side</h1>
+    <p>
+
+      <applet id="chromosome" code="org.concord.otrunk.applet.OTAppletViewer"
+width="800" height="350"
+archive="
+lib/applets-0.1.0-SNAPSHOT.jar, lib/biologica-0.1.0-SNAPSHOT.jar, lib/jna-jnidispatch-3.0.9-macosx.nar, lib/libjri-0.4-1-SNAPSHOT.jar, lib/bsf-2.4.0.jar, lib/jna-jnidispatch-3.0.9-win32.nar, lib/libjri-native-osx-0.4-1-SNAPSHOT-macosx.nar, lib/commons-logging-1.0.4.jar, lib/jna-jws-3.0.9.jar, lib/loader-0.1.0-SNAPSHOT.jar, lib/framework-0.1.0-SNAPSHOT.jar, lib/jna-examples-0.1.0-SNAPSHOT.jar, lib/js-1.6R5.jar">
+  <param name="url" value="combined.otml"/>
+  <param name="name" value="chromosome"/>
+        Your browser is completely ignoring the applet tag!
+      </applet>
+    </p>
+
+  <a href="#" onClick="test();">Test</a><br/>
+  <a href="#" onClick="test2();">Test2</a><br/>
+  <a href="#" onClick="useChild();">Load received child</a><br/>
+
+<input type="text" id="chatText" onkeypress="checkForEnter(event)">
+<input type="button" value="Chat" onclick="chat()">
+<input type="button" value="Send Current Child" onclick="sendChild()">
+
+<div id="chatMessages"></div>
+<script>
+
+function chatUpdated(topic, data) {
+  var div = document.createElement("DIV");
+  div.innerHTML = data.client + ": " + data.message;
+  document.getElementById('chatMessages').appendChild(div);
+  $.jGrowl(data.client + ": " + data.message);
+  var data = data.message
+}
+
+function chat() {
+  var message = document.getElementById('chatText').value;
+  var json = "{'message':'" + escapeQuotes(message) + "'}";
+  hub.publish("chat", json);
+}
+
+function sendChild() {
+	getApplet();
+	var child = applet.getChildOrg();
+    var json = "{'message':'" + escapeQuotes(child) + "'}";
+	hub.publish("chat", json);
+}
+
+function escapeQuotes(sString) {
+   return sString.replace(/(\')/gi, "\\$1").replace(/(\\\\\')/gi, "\\'");
+}
+
+function checkForEnter(e){
+  var e = e || event;
+  var key = e.keyCode || e.charCode;
+
+  if(key == 13){
+      chat();
+  }
+
+  return true;
+}
+
+var hub = new StreamHub();
+hub.connect("http://localhost:7878/");
+hub.subscribe("chat", chatUpdated);
+</script>
+
+  </body>
+</html>
+

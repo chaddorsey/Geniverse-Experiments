@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<otrunk id="33754150-b594-11d9-9669-0800200c9a66">
+  <imports>
+    <import class="org.concord.otrunk.OTSystem" />
+    <import class="org.concord.otrunk.biologica.OTChromosome" />
+    <import class="org.concord.otrunk.biologica.OTStaticOrganism" />
+    <import class="org.concord.otrunk.biologica.OTOrganism" />
+    <import class="org.concord.otrunk.biologica.OTWorld" />
+    <import class="org.concord.otrunk.view.OTViewEntry" />
+    <import class="org.concord.otrunk.view.OTViewBundle" />
+    <import class="org.concord.otrunk.view.document.OTCompoundDoc" />
+    <import class="org.concord.framework.otrunk.view.OTFrame" />
+  </imports>
+
+  <objects>
+    <OTSystem>
+      <bundles>
+        <OTViewBundle showLeftPanel="false">
+          <viewEntries>
+            <OTViewEntry
+              objectClass="org.concord.otrunk.biologica.OTChromosome"
+              viewClass="org.concord.otrunk.biologica.ui.OTChromosomeView" />
+            <OTViewEntry
+              objectClass="org.concord.otrunk.biologica.OTStaticOrganism"
+              viewClass="org.concord.otrunk.biologica.ui.OTStaticOrganismView" />
+            <OTViewEntry
+              objectClass="org.concord.otrunk.view.document.OTDocument"
+              viewClass="org.concord.otrunk.view.document.OTDocumentView" />
+          </viewEntries>
+          <frame>
+            <OTFrame width="1100" height="660" />
+          </frame>
+        </OTViewBundle>
+      </bundles>
+
+      <root>
+          <OTCompoundDoc name="Static Organism" local_id="static_org_page">
+              <bodyText>
+                <object refid="${static}" />
+                <object refid="${chromosome}" />
+              </bodyText>
+          <documentRefs>
+            <OTStaticOrganism local_id="static"
+              name="static_org">
+                <organism>
+                  <object refid="${maleOrganism}" />
+                </organism>
+            </OTStaticOrganism>
+            <OTChromosome local_id="chromosome"
+              name="chromosome" width="630" height="310">
+              <organism>
+                  <object refid="${maleOrganism}" />
+              </organism>
+            </OTChromosome>
+            <OTOrganism local_id="maleOrganism">
+              <name>male</name>
+              <sex>0</sex>
+              <world>
+                <object refid="${dragon_world}" />
+              </world>
+              <alleles>a:B</alleles>
+            </OTOrganism>
+            <OTOrganism local_id="femaleOrganism">
+              <name>female</name>
+              <sex>1</sex>
+              <world>
+                <object refid="${dragon_world}" />
+              </world>
+              <alleles>a:B</alleles>
+            </OTOrganism>
+            <OTWorld
+              speciesPath="org/concord/biologica/worlds/dragon.xml"
+              local_id="dragon_world" />
+          </documentRefs>
+        </OTCompoundDoc>
+
+      </root>
+
+    </OTSystem>
+  </objects>
+</otrunk>

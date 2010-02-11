@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Applet Test Including Comet Chat with StreamHub</title>
+<link rel="stylesheet" href="jquery.jgrowl.css" type="text/css" />
+<script src="streamhub-min.js"></script>
+<script type="text/javascript" src="library.js"></script>
+<script type="text/javascript" src="jquery-1.4.js"></script>
+<script type="text/javascript" src="jGrowl-1.2.4/jquery.jgrowl.js"></script>
+</head>
+<body>
+<h1>Applet tests</h1>
+<p>
+  <applet id="applet" code="org/concord/biologica/applets/PedigreeViewApplet.class"
+    archive="lib/applets-0.1.0-SNAPSHOT.jar, lib/biologica-0.1.0-SNAPSHOT.jar, lib/jna-jnidispatch-3.0.9-macosx.nar, lib/libjri-0.4-1-SNAPSHOT.jar, lib/bsf-2.4.0.jar, lib/jna-jnidispatch-3.0.9-win32.nar, lib/libjri-native-osx-0.4-1-SNAPSHOT-macosx.nar, lib/commons-logging-1.0.4.jar, lib/jna-jws-3.0.9.jar, lib/loader-0.1.0-SNAPSHOT.jar, lib/framework-0.1.0-SNAPSHOT.jar, lib/jna-examples-0.1.0-SNAPSHOT.jar, lib/js-1.6R5.jar"
+    width="550" height="280">
+    Your browser is completely ignoring the applet tag!
+  </applet>
+</p>
+<div class="controls">
+  <a href="javascript:breedOrganism();">breed new organism</a><br/>
+  <a href="javascript:displayChildInfo();">display child info</a><br/>
+  <a href="javascript:breedAndNotify();">breed and notify</a><br/>
+  <a href="javascript:setChildAlleles();">set child alleles</a><br/>
+</div>
+
+<div style="height: 5em;" id="child-info">
+  Unknown child info...
+</div>
+
+<input type="text" id="chatText" onkeypress="checkForEnter(event)">
+<input type="button" value="Chat" onclick="chat()">
+<input type="button" value="Send Current Child" onclick="sendChild()">
+
+<div id="chatMessages"></div>
+<script>
+
+function chatUpdated(topic, data) {
+  var div = document.createElement("DIV");
+  div.innerHTML = data.client + ": " + data.message;
+  document.getElementById('chatMessages').appendChild(div);
+  $.jGrowl(data.client + ": " + data.message);
+}
+
+function chat() {
+  var message = document.getElementById('chatText').value;
+  var json = "{'message':'" + escapeQuotes(message) + "'}";
+  hub.publish("chat", json);
+}
+
+function sendChild() {
+	getApplet();
+	var child = applet.getChildOrg();
+	var childMessage = child.getAlleleString();
+    var json = "{'message':'" + escapeQuotes(childMessage) + "'}";
+	hub.publish("chat", json);
+}
+
+function escapeQuotes(sString) {
+   return sString.replace(/(\')/gi, "\\$1").replace(/(\\\\\')/gi, "\\'");
+}
+
+function checkForEnter(e){
+  var e = e || event;
+  var key = e.keyCode || e.charCode;
+
+  if(key == 13){
+      chat();
+  }
+
+  return true;
+}
+
+var hub = new StreamHub();
+hub.connect("http://localhost:7878/");
+hub.subscribe("chat", chatUpdated);
+</script>
+</body>
+</html>
