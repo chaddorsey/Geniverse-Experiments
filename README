@@ -8,10 +8,6 @@ There is also information about setting up a Streamhub server sharing port 80 wi
 
 To compile the server (needed for configuration for some crazy reason):
 
-javac -cp streamhub-2.0.11.jar Chat.java
-
-NOTE: To configure your Comet chat server location in index.html and gvdemo.html, you will need to add an untracked file chat-server.js into the same directory as these two files. This file should contain a variable declaration indicating the location of your Comet chat server. This commonly looks something like this (one-line file):
-
-var chatserver = "http://localhost:7878/"; 
+avac -cp streamhub-2.0.11.jar Chat.java
 
 -Chad Dorsey
