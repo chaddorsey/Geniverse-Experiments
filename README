@@ -6,5 +6,8 @@ More information about this is available at http://streamhub.blogspot.com/2009/0
 
 There is also information about setting up a Streamhub server sharing port 80 with an HTTP connection on a single IP address at http://iamseanmurphy.com/2009/03/02/high-performance-comet-on-a-shoestring/
 
+To compile the server (needed for configuration for some crazy reason):
+
+avac -cp streamhub-2.0.11.jar Chat.java
 
 -Chad Dorsey
