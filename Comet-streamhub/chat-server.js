@@ -1,1 +1,0 @@
-var chatserver = "http://localhost:7878/";
