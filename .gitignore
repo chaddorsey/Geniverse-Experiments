@@ -1,5 +1,2 @@
 # Ignore log files from streamhub Comet server
-Comet-streamhub/Chat.class
-Comet-streamhub/Chat.java
-
 Comet-streamhub/logs/*
