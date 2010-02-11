@@ -1,2 +1,3 @@
 # Ignore log files from streamhub Comet server
 Comet-streamhub/logs/*
+Comet-streamhub/chat-server.js
