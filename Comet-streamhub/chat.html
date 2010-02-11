@@ -1,0 +1,46 @@
+<html>
+<head>
+  <title>Comet Chat with StreamHub</title>
+  <script src="streamhub_2_0_14/lib/js/streamhub-min.js"></script>
+</head>
+<body>
+  <input type="text" id="chatText" onkeypress="checkForEnter(event)">
+  <input type="button" value="Chat" onclick="chat()">
+
+  <div id="chatMessages"></div>
+  <script>
+  
+  function chatUpdated(topic, data) {
+    var div = document.createElement("DIV");
+    div.innerHTML = data.client + ": " + data.message;
+    document.getElementById('chatMessages').appendChild(div);
+  }
+
+  function chat() {
+    var message = document.getElementById('chatText').value;
+    var json = "{'message':'" + escapeQuotes(message) + "'}";
+    hub.publish("chat", json);
+  }
+
+  function escapeQuotes(sString) {
+     return sString.replace(/(\')/gi, "\\$1").replace(/(\\\\\')/gi, "\\'");
+  }
+  
+  function checkForEnter(e){
+    var e = e || event;
+    var key = e.keyCode || e.charCode;
+
+    if(key == 13){
+      chat();
+    }
+
+    return true;
+  }
+
+  var hub = new StreamHub();
+  hub.connect("http://localhost:7878/");
+  hub.subscribe("chat", chatUpdated);
+
+  </script>
+</body>
+</html>
