@@ -421,10 +421,12 @@ pair with that organism.</p>
 function chatUpdated(topic, data) {
   var div = document.createElement("DIV");
   div.innerHTML = data.client + ": " + data.message;
-  document.getElementById('chatMessages').appendChild(div);
+  if (check_for_json_organism(data.message)) {
+    div.style.backgroundColor = "fcc";
+  }
   var chat_items = document.getElementById('chatMessages').children;
+  
   //$.jGrowl(data.client + ": " + data.message);
-  lastJSON = data.message;
   //lastJSON = data.message;
   if (chat_items.length == 0) {
     document.getElementById('chatMessages').appendChild(div);
@@ -436,6 +438,18 @@ function chatUpdated(topic, data) {
   //var orgStoredJSON = data.organism;
   //var orgStored = eval(orgStoredJSON);
   //alert("Horns? " + orgStored.ChromosomeA.Horns);
+}
+
+function check_for_json_organism(text) {
+  var possibly_json = null;
+  try {
+    possibly_json = JSON.parse(text);
+    lastJSON = possibly_json;
+    return true;
+  }
+  catch(err) {
+    return false;
+  }
 }
 
 function chat() {
