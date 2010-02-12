@@ -11,6 +11,7 @@
     <import class="org.concord.otrunk.view.document.OTCompoundDoc" />
     <import class="org.concord.framework.otrunk.view.OTFrame" />
 	<import class="org.concord.otrunk.biologica.OTMultipleOrganism" />
+	<import class="org.concord.otrunk.biologica.OTBreedOffspring" />
   </imports>
 
   <objects>
@@ -27,18 +28,19 @@
             <OTViewEntry
               objectClass="org.concord.otrunk.view.document.OTDocument"
               viewClass="org.concord.otrunk.view.document.OTDocumentView" />
-			<OTViewEntry local_id="multiple-organism-view" objectClass="org.concord.otrunk.biologica.OTMultipleOrganism" viewClass="org.concord.otrunk.biologica.ui.OTMultipleOrganismView" nameTextVisible="false" />
+			<OTViewEntry local_id="multiple-organism-view" objectClass="org.concord.otrunk.biologica.OTMultipleOrganism" viewClass="org.concord.otrunk.biologica.ui.OTMultipleOrganismView" />
+			<OTViewEntry local_id="breed-offspring-view" objectClass="org.concord.otrunk.biologica.OTBreedOffspring" viewClass="org.concord.otrunk.biologica.ui.OTBreedOffspringView" />
           </viewEntries>
           <frame>
-            <OTFrame width="1100" height="260" />
+            <OTFrame width="1100" height="860" />
           </frame>
         </OTViewBundle>
       </bundles>
 
       <root>
-          <OTCompoundDoc name="Multiple Organism" local_id="multi_org_page">
+          <OTCompoundDoc name="Static Organism" local_id="static_org_page">
               <bodyText>
-				<object refid="${multiOrg}"/>
+                <object refid="${breedOffspring}" />
               </bodyText>
           <documentRefs>
             <OTStaticOrganism local_id="static"
@@ -53,6 +55,14 @@
                   <object refid="${maleOrganism}" />
               </organism>
             </OTChromosome>
+			<OTBreedOffspring local_id="breedOffspring">
+				<fatherOrganism>
+					<object refid="${maleOrganism}" />
+				</fatherOrganism>
+				<motherOrganism>
+					<object refid="${femaleOrganism}" />
+				</motherOrganism>
+			</OTBreedOffspring>
             <OTOrganism local_id="maleOrganism">
               <name>male</name>
               <sex>0</sex>
@@ -72,7 +82,7 @@
             <OTWorld
               speciesPath="org/concord/biologica/worlds/dragon.xml"
               local_id="dragon_world" />
-			<OTMultipleOrganism local_id="multiOrg" name="multiOrg" width="300" height="150" organismImageSize="2" />
+			<OTMultipleOrganism local_id="multipleOrganismView" name="multipleOrganismView" width="300" height="150" organismImageSize="2" />
           </documentRefs>
         </OTCompoundDoc>
 
