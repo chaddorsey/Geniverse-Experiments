@@ -1,17 +1,16 @@
 <html>
-  <head>
-	<title>Geniverse Advisory Board Demo</title>
+<head>
+	<title>Geniverse Advisory Board Demo</title> 
 	<link rel="stylesheet" href="jquery.jgrowl.css" type="text/css" />
 	<link href="../streamhub-lib/css/stockdemo.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="../streamhub-lib/css/demo-common.css" rel="stylesheet" type="text/css" media="all" />
-	<script type="text/javascript" src="streamhub-min.js"></script>
-	<script type="text/javascript" src="library.js"></script>
-	<script type="text/javascript" src="jquery-1.4.js"></script>
-
-	<script type="text/javascript" src="json2.js"></script>
-	<script type="text/javascript" src="chat-server.js"></script>
-	<script type="text/javascript" src="../streamhub-lib/js/jquery-1.3.2.min.js"></script>
-	<script type="text/javascript" src="../streamhub-lib/js/jquery-ui-1.7.2.custom.min.js"></script>
+    <script type="text/javascript" src="streamhub-min.js"></script>
+    <script type="text/javascript" src="library.js"></script>
+    <script type="text/javascript" src="jquery-1.4.js"></script>
+    <script type="text/javascript" src="json2.js"></script>
+    <script type="text/javascript" src="chat-server.js"></script>
+    <script type="text/javascript" src="../streamhub-lib/js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="../streamhub-lib/js/jquery-ui-1.7.2.custom.min.js"></script> 
     <script type="text/javascript">
       function getApplet(elementid) {
         return document.getElementById(elementid);
@@ -278,43 +277,53 @@
 		//var numberSelectedString = numberSelected+'';
 		//alert("Alleles: " + firstSelectedOrg.getAlleleString);
 	}
-    </script>
-  </head>
-  <body>
-
-<table>
+    </script> 
+</head>
+<body>
+<h1>Breeding Pool: Geniverse Advisory Board Demo</h1>
+<p>You can breed your mating pair of dragons to create offspring. 
+You can save offspring you might want to use or share later.
+You can chat with other experimentors by typing in the Chat field (warning the 
+Chat services takes about 1 minute to start responding after first loading the page). 
+You can even send a selected saved offspring to all the other experimentors.
+If someone else sends an organism you can replace one of your current mating 
+pair with that organism.</p>
+<a href="#" onClick="loadOrgFromJSON(lastJSON);">Load last received organism</a><br/>
+<table cellspacing="10">
 	<tr>
-		<td>
-			<a href="#" onClick="saveCurrentOrganism();">Save current child</a><br/>
-		  <a href="#" onClick="loadOrgFromJSON(lastJSON);">Load last received organism</a><br/>
-		  <a href="#" onClick="getSelectedOrganism();">Use selected organism</a><br/>
-				  <a href="#" onClick="sendSelectedOrganism();">Send selected organism</a><br/>
-      <applet id="breedOffspring" code="org.concord.otrunk.applet.OTAppletViewer"
-width="550" height="300"
-archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar
-">
-  <param name="url" value="breedOffspring.otml"/>
-  <param name="name" value="breedOffspring"/>
-  <param name="_master" value="breedOffspring"/>
-        Your browser is completely ignoring the applet tag!
-      </applet>
+		<td valign ="top">
+			<applet id="breedOffspring" code="org.concord.otrunk.applet.OTAppletViewer" width="520" height="300" archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar">
+				<param name="url" value="breedOffspring.otml" />
+				<param name="name" value="breedOffspring" />
+				<param name="_master" value="breedOffspring" />
+				Your browser is completely ignoring the applet tag! 
+			</applet>
 		</td>
-		<td>
-	<h1>Breeding Pool</h1>
-
-	<table summary="Breeding Pool">
-		<td width="400">
-		<input type="text" id="chatText" onkeypress="checkForEnter(event)">
-		<input type="button" value="Chat" onclick="chat()">
-		<input type="button" value="Send Current Child" onclick="test3()">
-
-		<div id="chatMessages"></div>
-		</td>		
-	</table>
-	</td>
-  </tr>
+		<td valign ="top">
+			<b>Communicate with other Experimentors</b> 
+			<table summary="Breeding Pool" width="480" cellspacing="5">
+				<tr>
+					<td>
+						<input type="button" value="Chat" onclick="chat()">
+						<input type="button" value="Send Offspring" onclick="test3()"> 
+						<input type="button" value="Clear Chat" onclick="removeChildren(document.getElementById('chatMessages'))">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" id="chatText" size="60" onkeypress="checkForEnter(event)">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="chatMessages"></div>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
 </table>
-	<script type="text/javascript">
+<script type="text/javascript">
 		function dragonChangeListener(sTopic, oData) {
 			var trElement = document.getElementById(sTopic);
 			var nameElement = trElement.childNodes[0];
@@ -357,27 +366,36 @@ archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.j
 		function setText(eElement, sText) {
 			eElement.innerHTML = sText;
 		}
-	</script>
-    </p>
-	      <applet id="multiOrg" code="org.concord.otrunk.applet.OTAppletViewer"
-	width="400" height="450"
-	archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar
-	">
-	  <param name="url" value="multiOrg.otml"/>
-	  <param name="name" value="multiOrg"/>
-	  <param name="_master" value="breedOffspring"/>
-	        Your browser is completely ignoring the applet tag!
-	      </applet>
-	    </p>
+	</script> 
+</p>
+<table cellspacing="5">
+	<tr>
+		<td>
+		  <a href="#" onClick="saveCurrentOrganism();">Save current offspring</a> |
+		  <a href="#" onClick="getSelectedOrganism();">Use selected organism</a> |
+		  <a href="#" onClick="sendSelectedOrganism();">Send selected organism</a>
+		</td>
+    </tr>
+    <tr>
+        <td>
+			<applet id="multiOrg" code="org.concord.otrunk.applet.OTAppletViewer" width="500" height="450" archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar">
+				<param name="url" value="multiOrg.otml" />
+				<param name="name" value="multiOrg" />
+				<param name="_master" value="breedOffspring" />
+				Your browser is completely ignoring the applet tag! 
+			</applet>
+		</td>
+	</tr>
+</table>
 
-  <!--<a href="#" onClick="test();">Test</a><br/>
+</p>
+<!--<a href="#" onClick="test();">Test</a><br/>
   <a href="#" onClick="test2();">Test2</a><br/>
   <a href="#" onClick="test3();">Send Current Child</a><br/> -->
-
-
-  <a href="#" onClick="loadOrgFromJSON(JSONTest);">Load from saved JSON</a><br/> -->
-
-  <!--<a href="#" onClick="loadFirstAlleleFromJSON(JSONTest);">Load first allele from JSON</a><br/>
+<a href="#" onClick="loadOrgFromJSON(JSONTest);">Load from saved JSON</a>
+<br />
+--> 
+<!--<a href="#" onClick="loadFirstAlleleFromJSON(JSONTest);">Load first allele from JSON</a><br/>
   <a href="#" onClick="testMessagePassing(this.recdMessage);">Show last message</a><br/>
 <div class="controls">
   <a href="javascript:breedOrganism();">breed new organism</a><br/>
@@ -417,6 +435,7 @@ function chat() {
   var message = document.getElementById('chatText').value;
   var json = "{'message':'" + escapeQuotes(message) + "'}";
   hub.publish("chat", json);
+  document.getElementById('chatText').value = '';
 }
 
 function sendCurrentOrganism(json) {
@@ -443,6 +462,14 @@ function checkForEnter(e){
   return true;
 }
 
+function removeChildren(element) {
+  try {
+  	while (element.hasChildNodes) element.removeChild(element.lastChild);
+  }
+  catch(err) {
+  }
+}
+
 var hub = new StreamHub();
 hub.connect(chatserver);
 hub.subscribe("Janet", dragonChangeListener);
@@ -455,8 +482,6 @@ hub.subscribe("Jim", dragonChangeListener);
 hub.subscribe("Karen", dragonChangeListener);
 
 hub.subscribe("chat", chatUpdated);
-</script>
-
-  </body>
+</script> 
+</body>
 </html>
-
