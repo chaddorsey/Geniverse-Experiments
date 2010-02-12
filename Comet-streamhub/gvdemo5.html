@@ -288,7 +288,6 @@ Chat services takes about 1 minute to start responding after first loading the p
 You can even send a selected saved offspring to all the other experimentors.
 If someone else sends an organism you can replace one of your current mating 
 pair with that organism.</p>
-<a href="#" onClick="loadOrgFromJSON(lastJSON);">Load last received organism</a><br/>
 <table cellspacing="10">
 	<tr>
 		<td valign ="top">
@@ -305,8 +304,11 @@ pair with that organism.</p>
 				<tr>
 					<td>
 						<input type="button" value="Chat" onclick="chat()">
-						<input type="button" value="Send Offspring" onclick="test3()"> 
+						<input type="button" value="Send Offspring" onclick="test3()">
 						<input type="button" value="Clear Chat" onclick="removeChildren(document.getElementById('chatMessages'))">
+						<input type="button" value="Load Last Received Organism" onclick="loadOrgFromJSON(lastJSON);">
+						<br /><a href="#" onClick="loadOrgFromJSON(lastJSON);">Load last received organism</a>
+
 					</td>
 				</tr>
 				<tr>
