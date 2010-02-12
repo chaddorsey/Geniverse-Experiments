@@ -433,7 +433,7 @@ function chatUpdated(topic, data) {
   if (chat_items.length == 0) {
     document.getElementById('chatMessages').appendChild(div);
   } else {
-    chat_items[0].insertBefore(div);
+    document.getElementById('chatMessages')[0].insertBefore(div);
   } 
   //loadOrg(data.message);
   //TODO Figure this out
