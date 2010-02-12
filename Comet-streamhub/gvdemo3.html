@@ -2,12 +2,16 @@
   <head>
 	<title>Applet Test Including Comet Chat with StreamHub</title>
 	<link rel="stylesheet" href="jquery.jgrowl.css" type="text/css" />
-	<script src="streamhub-min.js"></script>
+	<link href="../streamhub-lib/css/stockdemo.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../streamhub-lib/css/demo-common.css" rel="stylesheet" type="text/css" media="all" />
+	<script type="text/javascript" src="streamhub-min.js"></script>
 	<script type="text/javascript" src="library.js"></script>
 	<script type="text/javascript" src="jquery-1.4.js"></script>
-	<script type="text/javascript" src="jGrowl-1.2.4/jquery.jgrowl.js"></script>
+
 	<script type="text/javascript" src="json2.js"></script>
 	<script type="text/javascript" src="chat-server.js"></script>
+	<script type="text/javascript" src="../streamhub-lib/js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../streamhub-lib/js/jquery-ui-1.7.2.custom.min.js"></script>
     <script type="text/javascript">
       function getApplet(elementid) {
         return document.getElementById(elementid);
@@ -257,8 +261,9 @@
   </head>
   <body>
     <h1>Biologica side-by-side</h1>
-    <p>
-
+<table>
+	<tr>
+		<td>
       <applet id="breedOffspring" code="org.concord.otrunk.applet.OTAppletViewer"
 width="550" height="300"
 archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar
@@ -268,6 +273,68 @@ archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.j
   <param name="_master" value="breedOffspring"/>
         Your browser is completely ignoring the applet tag!
       </applet>
+		</td>
+		<td>
+	<h1>Breeding Pool</h1>
+
+	<table summary="Breeding Pool">
+		<tr><th>Student</th><th>Color</th><th colspan="2">Gender</th><th>Horns</th><th>Wings</th><th>Legs</th><th>Tail</th><th>Fire</th></tr>
+		<tr id="Janet"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
+		<tr id="Chris_D"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
+		<tr id="Lynn"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
+		<tr id="Trish"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
+		<tr id="Mike"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
+		<tr id="Brad"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
+		<tr id="Jim"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
+		<tr id="Karen"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>		
+	</table>
+	</td>
+  </tr>
+</table>
+	<script type="text/javascript">
+		function dragonChangeListener(sTopic, oData) {
+			var trElement = document.getElementById(sTopic);
+			var nameElement = trElement.childNodes[0];
+			var colorElement = trElement.childNodes[1];
+			var genderElement = trElement.childNodes[2];
+			var hornsElement = trElement.childNodes[3];
+			var wingsElement = trElement.childNodes[4];
+			var legsElement = trElement.childNodes[5];
+			var tailElement = trElement.childNodes[6];
+			var fireElement = trElement.childNodes[7];
+			setText(nameElement, oData.Name);
+			setText(colorElement, oData.Color);
+			setText(genderElement, oData.Gender);
+			setText(hornsElement, oData.Horns);
+			setText(wingsElement, oData.Wings);
+			setText(legsElement, oData.Legs);
+			setText(tailElement, oData.Tail);
+			setText(fireElement, oData.Fire);
+//			var imageSrc = (oData.Direction == "up") ? "../lib/images/green_up_arrow.gif" : "../lib/images/red_down_arrow.gif";
+//			var imageTag = "<img width=\"16\" height=\"16\" src=\"" + imageSrc + "\">";
+//			setText(arrowElement, imageTag);
+//			var changeText = oData.Change + " (" + oData.PercentChange + ")";
+
+//			if (oData.Change.charAt(0) == '-') {
+//				changeText = "<div style=\"color:#a03\">" + changeText + "<" + "/div>";
+//			} else {
+//				changeText = "<div style=\"color:green\">" + changeText + "<" + "/div>";
+//			}
+
+//			setText(changeElement, changeText);
+
+			try {
+				$("#" + sTopic).effect('highlight', {}, 700);
+			} catch(e) {
+				// IE6 can throw an exception here occasionally
+				$("#" + sTopic).css("background", "#fff");
+			}
+		}
+
+		function setText(eElement, sText) {
+			eElement.innerHTML = sText;
+		}
+	</script>
     </p>
 	      <applet id="multiOrg" code="org.concord.otrunk.applet.OTAppletViewer"
 	width="800" height="230"
@@ -359,10 +426,19 @@ function checkForEnter(e){
 
   return true;
 }
+
 var hub = new StreamHub();
 hub.connect(chatserver);
-hub.subscribe("chat", chatUpdated);
+hub.subscribe("Janet", dragonChangeListener);
+hub.subscribe("Chris_D", dragonChangeListener);
+hub.subscribe("Trish", dragonChangeListener);
+hub.subscribe("Lynn", dragonChangeListener);
+hub.subscribe("Brad", dragonChangeListener);
+hub.subscribe("Mike", dragonChangeListener);
+hub.subscribe("Jim", dragonChangeListener);
+hub.subscribe("Karen", dragonChangeListener);
 
+hub.subscribe("chat", chatUpdated);
 </script>
 
   </body>

@@ -199,7 +199,14 @@
 			//chromosome.setAllele(-90,trait,chromA[trait]);
 		reloadApplet();
 	}
+	function initMultiOrgView() {
+		var multiOrgView = componentForObject("multiOrg","multiOrg").getComponent(0).getComponent(0);
+		multiOrgView.setNameTextVisible(false);
+		multiOrgView.setSpeciesTextVisible(false);
+		multiOrgView.setCharacteristicsTextVisible(false);
+	}
 	function saveCurrentOrganism() {
+		initMultiOrgView();
 		var orgApplet = getApplet("chromosome");
 		var saveApplet = getApplet("multiOrg")
 		var multiOrgView = componentForObject("multiOrg","multiOrg");
