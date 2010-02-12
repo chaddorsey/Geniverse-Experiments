@@ -1,9 +1,9 @@
 <html>
 <head>
-	<title>Geniverse Advisory Board Demo</title> 
-	<link rel="stylesheet" href="jquery.jgrowl.css" type="text/css" />
-	<link href="../streamhub-lib/css/stockdemo.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="../streamhub-lib/css/demo-common.css" rel="stylesheet" type="text/css" media="all" />
+  <title>Geniverse Advisory Board Demo</title> 
+  <link rel="stylesheet" href="jquery.jgrowl.css" type="text/css" />
+  <link href="../streamhub-lib/css/stockdemo.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="../streamhub-lib/css/demo-common.css" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" src="streamhub-min.js"></script>
     <script type="text/javascript" src="library.js"></script>
     <script type="text/javascript" src="jquery-1.4.js"></script>
@@ -30,65 +30,65 @@
         var applet = getApplet(elementid);
         applet.getOTContainer().reloadView();
       }
-	function organism(org) {
-		chromosomes = [];
-		this.name = org.getName();
-		this.sex = org.getSexAsString();
-		this.alleleString = org.getAlleleString();
-		chromosomes = getChromosomeArray(org);
-		
-		//Still hard-wiring for standard dragon world order, and doing it all the hard way...
-		this.chromosomeA = {"Horns" : chromosomes[0].charAt(0), "Scales" : chromosomes[0].charAt(1), "Wings" : chromosomes[0].charAt(2), "Legs" : chromosomes[0].charAt(3), "Tails" : chromosomes[0].charAt(4)};
-		this.chromosomeB = {"Horns" : chromosomes[1].charAt(0), "Scales" : chromosomes[1].charAt(1), "Wings" : chromosomes[1].charAt(2), "Legs" : chromosomes[1].charAt(3), "Tails" : chromosomes[1].charAt(4)};
-		this.chromosomeSexA = {"Plates" : chromosomes[2].charAt(0), "Fire" : chromosomes[2].charAt(1), "Color1" : chromosomes[2].charAt(2), "Color2" : chromosomes[2].charAt(3)};
-		this.chromosomeSexB = {"Plates" : chromosomes[3].charAt(0), "Fire" : chromosomes[3].charAt(1), "Color1" : chromosomes[3].charAt(2), "Color2" : chromosomes[3].charAt(3)};
-	}
-	function getChromosomeArray(org) {
-		alleleString = org.getAlleleString();
-		sex = org.getSexAsString();
-		chromAString = "";
-		chromBString = "";
-		chromSexAString = "";
-		chromSexBString = "";
-		var chromosomeArray = [];
-		
-		//Split allele string into array elements
-		var alleles = alleleString.split(",");
-		
-		//For now, hard coding into the loop the fact that sex chromosomes start at position 5...
-		for(var i=0; i<10; i++) {
-			//Parse array into separate chromosome allele strings the hard way:
-			var string = alleles[i];
-			posA = string.indexOf("a:")
-			if(posA != -1) {
-				chromAString += string.charAt(posA+2);
-			}
-			posB = string.indexOf("b:")
-			if(posB != -1) {
-				chromBString += string.charAt(posB+2);
-			}
-		}
-		
-		//Continuing crude hard-coding of allele numbers to extract sex chromosomes
-		for(var i=10; i<alleles.length; i++) {
-			var string = alleles[i];
-			posA = string.indexOf("a:")
-			if(posA != -1) {
-				chromSexAString += string.charAt(posA+2);
-			}
-			posB = string.indexOf("b:")
-			if(posB != -1) {
-				chromSexBString += string.charAt(posB+2);
-			}
-		} 
-		//alert("A str: " + chromAString + " B str: " + chromBString + " Sex Chrom A: " + chromSexAString + " Sex chrom B: " + chromSexBString);
-		//Initialize chromosome array – still hard-wired for standard dragon chromosome.
-		chromosomeArray[0] = chromAString;
-		chromosomeArray[1] = chromBString;
-		chromosomeArray[2] = chromSexAString;
-		chromosomeArray[3] = chromSexBString;
-		return chromosomeArray;
-	}
+  function organism(org) {
+    chromosomes = [];
+    this.name = org.getName();
+    this.sex = org.getSexAsString();
+    this.alleleString = org.getAlleleString();
+    chromosomes = getChromosomeArray(org);
+    
+    //Still hard-wiring for standard dragon world order, and doing it all the hard way...
+    this.chromosomeA = {"Horns" : chromosomes[0].charAt(0), "Scales" : chromosomes[0].charAt(1), "Wings" : chromosomes[0].charAt(2), "Legs" : chromosomes[0].charAt(3), "Tails" : chromosomes[0].charAt(4)};
+    this.chromosomeB = {"Horns" : chromosomes[1].charAt(0), "Scales" : chromosomes[1].charAt(1), "Wings" : chromosomes[1].charAt(2), "Legs" : chromosomes[1].charAt(3), "Tails" : chromosomes[1].charAt(4)};
+    this.chromosomeSexA = {"Plates" : chromosomes[2].charAt(0), "Fire" : chromosomes[2].charAt(1), "Color1" : chromosomes[2].charAt(2), "Color2" : chromosomes[2].charAt(3)};
+    this.chromosomeSexB = {"Plates" : chromosomes[3].charAt(0), "Fire" : chromosomes[3].charAt(1), "Color1" : chromosomes[3].charAt(2), "Color2" : chromosomes[3].charAt(3)};
+  }
+  function getChromosomeArray(org) {
+    alleleString = org.getAlleleString();
+    sex = org.getSexAsString();
+    chromAString = "";
+    chromBString = "";
+    chromSexAString = "";
+    chromSexBString = "";
+    var chromosomeArray = [];
+    
+    //Split allele string into array elements
+    var alleles = alleleString.split(",");
+    
+    //For now, hard coding into the loop the fact that sex chromosomes start at position 5...
+    for(var i=0; i<10; i++) {
+      //Parse array into separate chromosome allele strings the hard way:
+      var string = alleles[i];
+      posA = string.indexOf("a:")
+      if(posA != -1) {
+        chromAString += string.charAt(posA+2);
+      }
+      posB = string.indexOf("b:")
+      if(posB != -1) {
+        chromBString += string.charAt(posB+2);
+      }
+    }
+    
+    //Continuing crude hard-coding of allele numbers to extract sex chromosomes
+    for(var i=10; i<alleles.length; i++) {
+      var string = alleles[i];
+      posA = string.indexOf("a:")
+      if(posA != -1) {
+        chromSexAString += string.charAt(posA+2);
+      }
+      posB = string.indexOf("b:")
+      if(posB != -1) {
+        chromSexBString += string.charAt(posB+2);
+      }
+    } 
+    //alert("A str: " + chromAString + " B str: " + chromBString + " Sex Chrom A: " + chromSexAString + " Sex chrom B: " + chromSexBString);
+    //Initialize chromosome array – still hard-wired for standard dragon chromosome.
+    chromosomeArray[0] = chromAString;
+    chromosomeArray[1] = chromBString;
+    chromosomeArray[2] = chromSexAString;
+    chromosomeArray[3] = chromSexBString;
+    return chromosomeArray;
+  }
       // print the allele string
       function test() {
         // this should return a StaticOrganismView
@@ -104,179 +104,165 @@
         chromosome = getLocalObject("chromosome");
         staticOrg.setOrganism(femaleOrg);
         chromosome.setOrganism(femaleOrg);
-		reloadApplet();
+    reloadApplet();
       }
-	function test3() {
-		var applet = getApplet("breedOffspring");
-		//femaleOrg = getLocalObject("femaleOrganism");
-		var breedOffspringView = componentForObject("breedOffspring", "breedOffspring").getComponent(4);
-		currentOrg = breedOffspringView.getOrganism();
-		var org1 = new organism(currentOrg);
-		//org2 = new organism(maleOrg);
-		//org1.sex = femaleOrg.getSexAsString();
-		//org2.sex = maleOrg.getSexAsString();
-		//alert ("Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
-		JSONTest = JSON.stringify(org1);
-		//alert("JSON: " + JSONTest);
-		alert("Organism sent!");
-		sendCurrentOrganism(JSONTest);
-	}
-	function getOrg(elementid, localId) {
-		var staticOrgView = componentForObject(elementid,localId);
+  function test3() {
+    var applet = getApplet("breedOffspring");
+    //femaleOrg = getLocalObject("femaleOrganism");
+    var breedOffspringView = componentForObject("breedOffspring", "breedOffspring").getComponent(4);
+    currentOrg = breedOffspringView.getOrganism();
+    var org1 = new organism(currentOrg);
+    //org2 = new organism(maleOrg);
+    //org1.sex = femaleOrg.getSexAsString();
+    //org2.sex = maleOrg.getSexAsString();
+    //alert ("Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
+    JSONTest = JSON.stringify(org1);
+    //alert("JSON: " + JSONTest);
+    alert("Organism sent!");
+    sendCurrentOrganism(JSONTest);
+  }
+  function getOrg(elementid, localId) {
+    var staticOrgView = componentForObject(elementid,localId);
         var org = staticOrgView.getOrganism();
-		return org;
-	}
-	function displayOrgInfo() {
-		var child = getOrg();
-		var disp = document.getElementById("child-info");
-		disp.innerHTML = "... Calculating child information ...";
-		disp.innerHTML = "Name: " + child.getName() + "<br/>" +
-		  "Sex: " + child.getSexAsString() + "<br/>" +
-		  "Alleles: " + child.getAlleleString() + "<br/>" +
-		  "Pheno: " + getPhenoStr(child) + "<br/>" +
-		  "No. of images: " + child.getNumberOfOrganismImages() + "<br/>" +
-		  "Geno: " + child.getGenotypeAsString() + "<br/>";
-		//images = getImages(child);
-		//firstImage = images[0];
-		//showImage(firstImage);
-		//alert("Images: " + images.length);
-	}
-	
-	//Doesn't work yet
-	function showImage(image) {
-		var img = document.createElement('img');
-		// img.src = getImage(org);
-		ing.src = image;
-		img.setAttribute('width', '100%');
-		img.setAttribute('height', '100%');
-		img.alt = 'Dragon';
-		document.body.appendChild(img);
-	}
-	function recoverJSON(orgJSON) {
-		var org = JSON.parse(orgJSON);
-		return org;
-	}
-	function loadAlleles(org) {
-		//load chromosome A alleles
-		var applet = getApplet("breedOffspring");
+    return org;
+  }
+  function displayOrgInfo() {
+    var child = getOrg();
+    var disp = document.getElementById("child-info");
+    disp.innerHTML = "... Calculating child information ...";
+    disp.innerHTML = "Name: " + child.getName() + "<br/>" +
+      "Sex: " + child.getSexAsString() + "<br/>" +
+      "Alleles: " + child.getAlleleString() + "<br/>" +
+      "Pheno: " + getPhenoStr(child) + "<br/>" +
+      "No. of images: " + child.getNumberOfOrganismImages() + "<br/>" +
+      "Geno: " + child.getGenotypeAsString() + "<br/>";
+    //images = getImages(child);
+    //firstImage = images[0];
+    //showImage(firstImage);
+    //alert("Images: " + images.length);
+  }
+  
+  //Doesn't work yet
+  function showImage(image) {
+    var img = document.createElement('img');
+    // img.src = getImage(org);
+    ing.src = image;
+    img.setAttribute('width', '100%');
+    img.setAttribute('height', '100%');
+    img.alt = 'Dragon';
+    document.body.appendChild(img);
+  }
+  function recoverJSON(orgJSON) {
+    var org = JSON.parse(orgJSON);
+    return org;
+  }
+  function loadAlleles(org) {
+    //load chromosome A alleles
+    var applet = getApplet("breedOffspring");
         //staticOrg = getLocalObject("static");
         //chromosome = getLocalObject("chromosome");
-		var breedOffspringFather = componentForObject("breedOffspring","breedOffspring").getComponent(5);
-		var breedOffspringChild = componentForObject("breedOffspring","breedOffspring").getComponent(4);
-		var breedOffspringMother = componentForObject("breedOffspring","breedOffspring").getComponent(3);
-		if (org.sex == "female") {
-			var appletOrg = breedOffspringMother.getOrganism();
-		}
-		else if (org.sex == "male") {
-			var appletOrg = breedOffspringFather.getOrganism();
-		}
-		else {
-			alert("Something seems fishy with the incoming organism data…")
-		}
-		
-		//var appletOrg = getOrg();
-  		var chromA = org.chromosomeA;
-		for (var trait in chromA) {
-			//alert(trait + " = " + chromA[trait]);
-			appletOrg.setAllele(-90,trait,chromA[trait]);
-			//chromosome.setAllele(-90,trait,chromA[trait]);
-		}
-		//load chromosomeB alleles
-		var chromB = org.chromosomeB;
-		for (var trait in chromB) {
-			appletOrg.setAllele(-91,trait,chromB[trait]);
-			//chromosome.setAllele(-91,trait,chromA[trait]);
-		}
-		//load chromosomeSexA alleles
-		var chromSexA = org.chromosomeSexA;
-		for (var trait in chromSexA) {
-			appletOrg.setAllele(-90,trait,chromSexA[trait]);
-			//chromosome.setAllele(-90,trait,chromSexA[trait]);
-		}
-		//load chromosomeSexB alleles
-		var chromSexB = org.chromosomeSexB;
-		for (var trait in chromSexB) {
-			appletOrg.setAllele(-91,trait,chromSexB[trait]);
-			//chromosome.setAllele(-91,trait,chromSexB[trait]);
-		} 
-		reloadApplet(breedOffspring);
-	}
-	function loadOrgFromJSON(orgJSON) {
-		var org = recoverJSON(orgJSON);
-		loadAlleles(org);
-	}
-	function loadFirstAlleleFromJSON(elementid, localId, orgJSON) {
-		var applet = getApplet(elementid);
-		var appletOrg = getOrg(elementid, localId);
-       	//staticOrg = getLocalObject("static");
-		var org = recoverJSON(orgJSON);
-  		var chromA = org.chromosomeA;
-		//for (var trait in chromA) {
-			//alert(trait + " = " + chromA[trait]);
-		appletOrg.setAllele(-90,"Horns",chromA.Horns);
-			//chromosome.setAllele(-90,trait,chromA[trait]);
-		reloadApplet();
-	}
-	function initMultiOrgView() {
-		var multiOrgView = componentForObject("multiOrg","multiOrg").getComponent(0).getComponent(0);
-		multiOrgView.setNameTextVisible(false);
-		multiOrgView.setSpeciesTextVisible(false);
-		multiOrgView.setCharacteristicsTextVisible(false);
-	}
-	function saveCurrentOrganism() {
-		initMultiOrgView();
-		var orgApplet = getApplet("breedOffspring");
-		var saveApplet = getApplet("multiOrg")
-		var breedOffspringView = componentForObject("breedOffspring", "breedOffspring").getComponent(4);
-		var multiOrgView = componentForObject("multiOrg","multiOrg").getComponent(0).getComponent(0);
-		saved_orgs= [];
-		var number_saved = saved_orgs.length;
-		//femaleOrg = getLocalObject("femaleOrganism");
-		//currentOrg = getOrg("chromosome","static");
-		currentChild = breedOffspringView.getOrganism();
-		multiOrgView.addOrganism(currentChild);
-	}
-	function getSelectedOrganism() {
-		var orgApplet = getApplet("breedOffspring");
-		var breedOffspringFather = componentForObject("breedOffspring","breedOffspring").getComponent(3);
-		var breedOffspringChild = componentForObject("breedOffspring","breedOffspring").getComponent(4);
-		var breedOffspringMother = componentForObject("breedOffspring","breedOffspring").getComponent(5);
-		var multiOrgView = componentForObject("multiOrg", "multiOrg").getComponent(0).getComponent(0);
-		var selectionVector = [];
-		firstSelectedOrg = multiOrgView.getSelectionSet().getSelectedObjectAtIndex(0);
-		var org1 = new organism(firstSelectedOrg);
-		loadAlleles(org1);
-		//org2 = new organism(maleOrg);
-		//org1.sex = femaleOrg.getSexAsString();
-		//org2.sex = maleOrg.getSexAsString();
-		//alert ("Selected Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
-		JSONTest = JSON.stringify(org1);
-		//alert("JSON: " + JSONTest);
-		sendCurrentOrganism(JSONTest);
-		//var numberSelected = selectionVector.getNumberOfSelectedObjects();
-		//var numberSelectedString = numberSelected+'';
-		//alert("Alleles: " + firstSelectedOrg.getAlleleString);
-	}
-	function sendSelectedOrganism() {
-		var orgApplet = getApplet("breedOffspring");
-		var breedOffspringFather = componentForObject("breedOffspring","breedOffspring").getComponent(3);
-		var breedOffspringChild = componentForObject("breedOffspring","breedOffspring").getComponent(4);
-		var breedOffspringMother = componentForObject("breedOffspring","breedOffspring").getComponent(5);
-		var multiOrgView = componentForObject("multiOrg", "multiOrg").getComponent(0).getComponent(0);
-		var selectionVector = [];
-		firstSelectedOrg = multiOrgView.getSelectionSet().getSelectedObjectAtIndex(0);
-		var org1 = new organism(firstSelectedOrg);
-		//org2 = new organism(maleOrg);
-		//org1.sex = femaleOrg.getSexAsString();
-		//org2.sex = maleOrg.getSexAsString();
-		//alert ("Selected Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
-		JSONTest = JSON.stringify(org1);
-		//alert("JSON: " + JSONTest);
-		sendCurrentOrganism(JSONTest);
-		//var numberSelected = selectionVector.getNumberOfSelectedObjects();
-		//var numberSelectedString = numberSelected+'';
-		//alert("Alleles: " + firstSelectedOrg.getAlleleString);
-	}
+    var breedOffspringFather = componentForObject("breedOffspring","breedOffspring").getComponent(5);
+    var breedOffspringChild = componentForObject("breedOffspring","breedOffspring").getComponent(4);
+    var breedOffspringMother = componentForObject("breedOffspring","breedOffspring").getComponent(3);
+    if (org.sex == "female") {
+      var appletOrg = breedOffspringMother.getOrganism();
+    }
+    else if (org.sex == "male") {
+      var appletOrg = breedOffspringFather.getOrganism();
+    }
+    else {
+      alert("Something seems fishy with the incoming organism data…")
+    }
+    
+    //var appletOrg = getOrg();
+      var chromA = org.chromosomeA;
+    for (var trait in chromA) {
+      //alert(trait + " = " + chromA[trait]);
+      appletOrg.setAllele(-90,trait,chromA[trait]);
+      //chromosome.setAllele(-90,trait,chromA[trait]);
+    }
+    //load chromosomeB alleles
+    var chromB = org.chromosomeB;
+    for (var trait in chromB) {
+      appletOrg.setAllele(-91,trait,chromB[trait]);
+      //chromosome.setAllele(-91,trait,chromA[trait]);
+    }
+    //load chromosomeSexA alleles
+    var chromSexA = org.chromosomeSexA;
+    for (var trait in chromSexA) {
+      appletOrg.setAllele(-90,trait,chromSexA[trait]);
+      //chromosome.setAllele(-90,trait,chromSexA[trait]);
+    }
+    //load chromosomeSexB alleles
+    var chromSexB = org.chromosomeSexB;
+    for (var trait in chromSexB) {
+      appletOrg.setAllele(-91,trait,chromSexB[trait]);
+      //chromosome.setAllele(-91,trait,chromSexB[trait]);
+    } 
+    reloadApplet(breedOffspring);
+  }
+  function loadOrgFromJSON(orgJSON) {
+    loadAlleles(orgJSON);
+  }
+  function loadFirstAlleleFromJSON(elementid, localId, orgJSON) {
+    var applet = getApplet(elementid);
+    var appletOrg = getOrg(elementid, localId);
+        //staticOrg = getLocalObject("static");
+    var org = recoverJSON(orgJSON);
+      var chromA = org.chromosomeA;
+    //for (var trait in chromA) {
+      //alert(trait + " = " + chromA[trait]);
+    appletOrg.setAllele(-90,"Horns",chromA.Horns);
+      //chromosome.setAllele(-90,trait,chromA[trait]);
+    reloadApplet();
+  }
+  function initMultiOrgView() {
+    var multiOrgView = componentForObject("multiOrg","multiOrg").getComponent(0).getComponent(0);
+    multiOrgView.setNameTextVisible(false);
+    multiOrgView.setSpeciesTextVisible(false);
+    multiOrgView.setCharacteristicsTextVisible(false);
+  }
+  function saveCurrentOrganism() {
+    initMultiOrgView();
+    var orgApplet = getApplet("breedOffspring");
+    var saveApplet = getApplet("multiOrg")
+    var breedOffspringView = componentForObject("breedOffspring", "breedOffspring").getComponent(4);
+    var multiOrgView = componentForObject("multiOrg","multiOrg").getComponent(0).getComponent(0);
+    saved_orgs= [];
+    var number_saved = saved_orgs.length;
+    //femaleOrg = getLocalObject("femaleOrganism");
+    //currentOrg = getOrg("chromosome","static");
+    currentChild = breedOffspringView.getOrganism();
+    multiOrgView.addOrganism(currentChild);
+  }
+  function getSelectedOrganism() {
+    var orgApplet = getApplet("breedOffspring");
+    var breedOffspringFather = componentForObject("breedOffspring","breedOffspring").getComponent(3);
+    var breedOffspringChild = componentForObject("breedOffspring","breedOffspring").getComponent(4);
+    var breedOffspringMother = componentForObject("breedOffspring","breedOffspring").getComponent(5);
+    var multiOrgView = componentForObject("multiOrg", "multiOrg").getComponent(0).getComponent(0);
+    var selectionVector = [];
+    firstSelectedOrg = multiOrgView.getSelectionSet().getSelectedObjectAtIndex(0);
+    var org1 = new organism(firstSelectedOrg);
+    loadAlleles(org1);
+    //org2 = new organism(maleOrg);
+    //org1.sex = femaleOrg.getSexAsString();
+    //org2.sex = maleOrg.getSexAsString();
+    //alert ("Selected Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
+    JSONTest = JSON.stringify(org1);
+    //alert("JSON: " + JSONTest);
+    sendCurrentOrganism(JSONTest);
+    //var numberSelected = selectionVector.getNumberOfSelectedObjects();
+    //var numberSelectedString = numberSelected+'';
+    //alert("Alleles: " + firstSelectedOrg.getAlleleString);
+  }
+  function sendSelectedOrganism() {
+    var multiOrgView = componentForObject("multiOrg", "multiOrg").getComponent(0).getComponent(0);
+    var firstSelectedOrg = multiOrgView.getSelectionSet().getSelectedObjectAtIndex(0);
+    var org1 = new organism(firstSelectedOrg);
+    var json_organism = JSON.stringify(org1);
+    sendCurrentOrganism(json_organism);
+  }
     </script> 
 </head>
 <body>
@@ -289,105 +275,103 @@ You can even send a selected saved offspring to all the other experimentors.
 If someone else sends an organism you can replace one of your current mating 
 pair with that organism.</p>
 <table cellspacing="10">
-	<tr>
-		<td valign ="top">
-			<applet id="breedOffspring" code="org.concord.otrunk.applet.OTAppletViewer" width="520" height="300" archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar">
-				<param name="url" value="breedOffspring.otml" />
-				<param name="name" value="breedOffspring" />
-				<param name="_master" value="breedOffspring" />
-				Your browser is completely ignoring the applet tag! 
-			</applet>
-		</td>
-		<td valign ="top">
-			<b>Communicate with other Experimentors</b> 
-			<table summary="Breeding Pool" width="480" cellspacing="5">
-				<tr>
-					<td>
-						<input type="button" value="Chat" onclick="chat()">
-						<input type="button" value="Send Offspring" onclick="test3()">
-						<input type="button" value="Clear Chat" onclick="removeChildren(document.getElementById('chatMessages'))">
-						<input type="button" value="Load Last Received Organism" onclick="loadOrgFromJSON(lastJSON);">
-						<br /><a href="#" onClick="loadOrgFromJSON(lastJSON);">Load last received organism</a>
-
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" id="chatText" size="60" onkeypress="checkForEnter(event)">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div id="chatMessages"></div>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
+  <tr>
+    <td valign ="top">
+      <applet id="breedOffspring" code="org.concord.otrunk.applet.OTAppletViewer" width="520" height="300" archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar">
+        <param name="url" value="breedOffspring.otml" />
+        <param name="name" value="breedOffspring" />
+        <param name="_master" value="breedOffspring" />
+        Your browser is completely ignoring the applet tag! 
+      </applet>
+    </td>
+    <td valign ="top">
+      <b>Communicate with other Experimentors</b> 
+      <table summary="Breeding Pool" width="480" cellspacing="5">
+        <tr>
+          <td>
+            <input type="button" value="Chat" onclick="chat()">
+            <input type="button" value="Send Offspring" onclick="test3()">
+            <input type="button" value="Clear Chat" onclick="removeChildren(document.getElementById('chatMessages'))">
+            <input type="button" value="Load Last Received Organism" onclick="loadOrgFromJSON(lastJSON);">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" id="chatText" size="60" onkeypress="checkForEnter(event)">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div id="chatMessages"></div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 </table>
 <script type="text/javascript">
-		function dragonChangeListener(sTopic, oData) {
-			var trElement = document.getElementById(sTopic);
-			var nameElement = trElement.childNodes[0];
-			var colorElement = trElement.childNodes[1];
-			var genderElement = trElement.childNodes[2];
-			var hornsElement = trElement.childNodes[3];
-			var wingsElement = trElement.childNodes[4];
-			var legsElement = trElement.childNodes[5];
-			var tailElement = trElement.childNodes[6];
-			var fireElement = trElement.childNodes[7];
-			setText(nameElement, oData.Name);
-			setText(colorElement, oData.Color);
-			setText(genderElement, oData.Gender);
-			setText(hornsElement, oData.Horns);
-			setText(wingsElement, oData.Wings);
-			setText(legsElement, oData.Legs);
-			setText(tailElement, oData.Tail);
-			setText(fireElement, oData.Fire);
-//			var imageSrc = (oData.Direction == "up") ? "../lib/images/green_up_arrow.gif" : "../lib/images/red_down_arrow.gif";
-//			var imageTag = "<img width=\"16\" height=\"16\" src=\"" + imageSrc + "\">";
-//			setText(arrowElement, imageTag);
-//			var changeText = oData.Change + " (" + oData.PercentChange + ")";
+    function dragonChangeListener(sTopic, oData) {
+      var trElement = document.getElementById(sTopic);
+      var nameElement = trElement.childNodes[0];
+      var colorElement = trElement.childNodes[1];
+      var genderElement = trElement.childNodes[2];
+      var hornsElement = trElement.childNodes[3];
+      var wingsElement = trElement.childNodes[4];
+      var legsElement = trElement.childNodes[5];
+      var tailElement = trElement.childNodes[6];
+      var fireElement = trElement.childNodes[7];
+      setText(nameElement, oData.Name);
+      setText(colorElement, oData.Color);
+      setText(genderElement, oData.Gender);
+      setText(hornsElement, oData.Horns);
+      setText(wingsElement, oData.Wings);
+      setText(legsElement, oData.Legs);
+      setText(tailElement, oData.Tail);
+      setText(fireElement, oData.Fire);
+//      var imageSrc = (oData.Direction == "up") ? "../lib/images/green_up_arrow.gif" : "../lib/images/red_down_arrow.gif";
+//      var imageTag = "<img width=\"16\" height=\"16\" src=\"" + imageSrc + "\">";
+//      setText(arrowElement, imageTag);
+//      var changeText = oData.Change + " (" + oData.PercentChange + ")";
 
-//			if (oData.Change.charAt(0) == '-') {
-//				changeText = "<div style=\"color:#a03\">" + changeText + "<" + "/div>";
-//			} else {
-//				changeText = "<div style=\"color:green\">" + changeText + "<" + "/div>";
-//			}
+//      if (oData.Change.charAt(0) == '-') {
+//        changeText = "<div style=\"color:#a03\">" + changeText + "<" + "/div>";
+//      } else {
+//        changeText = "<div style=\"color:green\">" + changeText + "<" + "/div>";
+//      }
 
-//			setText(changeElement, changeText);
+//      setText(changeElement, changeText);
 
-			try {
-				$("#" + sTopic).effect('highlight', {}, 700);
-			} catch(e) {
-				// IE6 can throw an exception here occasionally
-				$("#" + sTopic).css("background", "#fff");
-			}
-		}
+      try {
+        $("#" + sTopic).effect('highlight', {}, 700);
+      } catch(e) {
+        // IE6 can throw an exception here occasionally
+        $("#" + sTopic).css("background", "#fff");
+      }
+    }
 
-		function setText(eElement, sText) {
-			eElement.innerHTML = sText;
-		}
-	</script> 
+    function setText(eElement, sText) {
+      eElement.innerHTML = sText;
+    }
+  </script> 
 </p>
 <table cellspacing="5">
-	<tr>
-		<td>
-		  <a href="#" onClick="saveCurrentOrganism();">Save current offspring</a> |
-		  <a href="#" onClick="getSelectedOrganism();">Use selected organism</a> |
-		  <a href="#" onClick="sendSelectedOrganism();">Send selected organism</a>
-		</td>
+  <tr>
+    <td>
+      <a href="#" onClick="saveCurrentOrganism();">Save current offspring</a> |
+      <a href="#" onClick="getSelectedOrganism();">Use selected organism</a> |
+      <a href="#" onClick="sendSelectedOrganism();">Send selected organism</a>
+    </td>
     </tr>
     <tr>
         <td>
-			<applet id="multiOrg" code="org.concord.otrunk.applet.OTAppletViewer" width="500" height="450" archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar">
-				<param name="url" value="multiOrg.otml" />
-				<param name="name" value="multiOrg" />
-				<param name="_master" value="breedOffspring" />
-				Your browser is completely ignoring the applet tag! 
-			</applet>
-		</td>
-	</tr>
+      <applet id="multiOrg" code="org.concord.otrunk.applet.OTAppletViewer" width="500" height="450" archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar">
+        <param name="url" value="multiOrg.otml" />
+        <param name="name" value="multiOrg" />
+        <param name="_master" value="breedOffspring" />
+        Your browser is completely ignoring the applet tag! 
+      </applet>
+    </td>
+  </tr>
 </table>
 
 </p>
@@ -407,7 +391,7 @@ pair with that organism.</p>
   <a href="javascript:getChromosomes();">get chromosome</a><br/>
 </div> 
 <table width="900">
-	<td width="500">
+  <td width="500">
 <div style="height: 5em;" id="child-info">
   Unknown child info...
 </div>
@@ -415,7 +399,7 @@ pair with that organism.</p>
 </table> 
 
 <div id="dragonImages">
-	<img src="" name="imageReplace">
+  <img src="" name="imageReplace">
 </div>
 -->
 <script type="text/javascript">
@@ -426,14 +410,12 @@ function chatUpdated(topic, data) {
   if (check_for_json_organism(data.message)) {
     div.style.backgroundColor = "fcc";
   }
-  var chat_items = document.getElementById('chatMessages').children;
-  
   //$.jGrowl(data.client + ": " + data.message);
   //lastJSON = data.message;
-  if (chat_items.length == 0) {
+  if (document.getElementById('chatMessages').children.length == 0) {
     document.getElementById('chatMessages').appendChild(div);
   } else {
-    document.getElementById('chatMessages')[0].insertBefore(div);
+    document.getElementById('chatMessages').insertBefore(div, document.getElementById('chatMessages').children[0]);
   } 
   //loadOrg(data.message);
   //TODO Figure this out
@@ -462,12 +444,12 @@ function chat() {
 }
 
 function sendCurrentOrganism(json) {
-	//getApplet();
-	//var child = applet.getChildOrg();
+  //getApplet();
+  //var child = applet.getChildOrg();
     var jsonMessage = "{'message':'" + escapeQuotes(json) + "'}";
-	hub.publish("chat", jsonMessage);
-	var jsonOrganism = "{'organism':'" + escapeQuotes(json) + "'}";
-	hub.publish("organism", jsonOrganism);
+  hub.publish("chat", jsonMessage);
+  var jsonOrganism = "{'organism':'" + escapeQuotes(json) + "'}";
+  hub.publish("organism", jsonOrganism);
 }
 
 function escapeQuotes(sString) {
@@ -487,7 +469,7 @@ function checkForEnter(e){
 
 function removeChildren(element) {
   try {
-  	while (element.hasChildNodes) element.removeChild(element.lastChild);
+    while (element.hasChildNodes) element.removeChild(element.lastChild);
   }
   catch(err) {
   }
