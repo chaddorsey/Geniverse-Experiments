@@ -422,8 +422,15 @@ function chatUpdated(topic, data) {
   var div = document.createElement("DIV");
   div.innerHTML = data.client + ": " + data.message;
   document.getElementById('chatMessages').appendChild(div);
+  var chat_items = document.getElementById('chatMessages').children;
   //$.jGrowl(data.client + ": " + data.message);
   lastJSON = data.message;
+  //lastJSON = data.message;
+  if (chat_items.length == 0) {
+    document.getElementById('chatMessages').appendChild(div);
+  } else {
+    chat_items[0].insertBefore(div);
+  } 
   //loadOrg(data.message);
   //TODO Figure this out
   //var orgStoredJSON = data.organism;
