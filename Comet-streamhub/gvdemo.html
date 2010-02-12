@@ -199,6 +199,27 @@
 			//chromosome.setAllele(-90,trait,chromA[trait]);
 		reloadApplet();
 	}
+	function saveCurrentOrganism() {
+		var orgApplet = getApplet("chromosome");
+		var saveApplet = getApplet("multiOrg")
+		var multiOrgView = componentForObject("multiOrg","multipleOrganismView");
+		saved_orgs= [];
+		var number_saved = saved_orgs.length;
+		//femaleOrg = getLocalObject("femaleOrganism");
+		currentOrg = getOrg("chromosome","static");
+		multiOrgView.addOrganism(currentOrg)
+		saved_orgs[number_saved-1]= new organism(currentOrg);
+		
+		JSONTest = JSON.stringify(currentOrg);
+		alert("JSON: " + JSONTest);
+				
+		//org2 = new organism(maleOrg);
+		//org1.sex = femaleOrg.getSexAsString();
+		//org2.sex = maleOrg.getSexAsString();
+		//alert ("Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
+
+		//sendCurrentOrganism(JSONTest);	
+	}
     </script>
   </head>
   <body>
