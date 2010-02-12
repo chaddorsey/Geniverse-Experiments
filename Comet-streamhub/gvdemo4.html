@@ -116,9 +116,10 @@
 		//org2 = new organism(maleOrg);
 		//org1.sex = femaleOrg.getSexAsString();
 		//org2.sex = maleOrg.getSexAsString();
-		alert ("Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
+		//alert ("Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
 		JSONTest = JSON.stringify(org1);
-		alert("JSON: " + JSONTest);
+		//alert("JSON: " + JSONTest);
+		alert("Organism sent!");
 		sendCurrentOrganism(JSONTest);
 	}
 	function getOrg(elementid, localId) {
@@ -244,14 +245,34 @@
 		var multiOrgView = componentForObject("multiOrg", "multiOrg").getComponent(0).getComponent(0);
 		var selectionVector = [];
 		firstSelectedOrg = multiOrgView.getSelectionSet().getSelectedObjectAtIndex(0);
-
+		var org1 = new organism(firstSelectedOrg);
+		loadAlleles(org1);
+		//org2 = new organism(maleOrg);
+		//org1.sex = femaleOrg.getSexAsString();
+		//org2.sex = maleOrg.getSexAsString();
+		//alert ("Selected Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
+		JSONTest = JSON.stringify(org1);
+		//alert("JSON: " + JSONTest);
+		sendCurrentOrganism(JSONTest);
+		//var numberSelected = selectionVector.getNumberOfSelectedObjects();
+		//var numberSelectedString = numberSelected+'';
+		//alert("Alleles: " + firstSelectedOrg.getAlleleString);
+	}
+	function sendSelectedOrganism() {
+		var orgApplet = getApplet("breedOffspring");
+		var breedOffspringFather = componentForObject("breedOffspring","breedOffspring").getComponent(3);
+		var breedOffspringChild = componentForObject("breedOffspring","breedOffspring").getComponent(4);
+		var breedOffspringMother = componentForObject("breedOffspring","breedOffspring").getComponent(5);
+		var multiOrgView = componentForObject("multiOrg", "multiOrg").getComponent(0).getComponent(0);
+		var selectionVector = [];
+		firstSelectedOrg = multiOrgView.getSelectionSet().getSelectedObjectAtIndex(0);
 		var org1 = new organism(firstSelectedOrg);
 		//org2 = new organism(maleOrg);
 		//org1.sex = femaleOrg.getSexAsString();
 		//org2.sex = maleOrg.getSexAsString();
-		alert ("Selected Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
+		//alert ("Selected Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
 		JSONTest = JSON.stringify(org1);
-		alert("JSON: " + JSONTest);
+		//alert("JSON: " + JSONTest);
 		sendCurrentOrganism(JSONTest);
 		//var numberSelected = selectionVector.getNumberOfSelectedObjects();
 		//var numberSelectedString = numberSelected+'';
@@ -264,6 +285,10 @@
 <table>
 	<tr>
 		<td>
+			<a href="#" onClick="saveCurrentOrganism();">Save current child</a><br/>
+		  <a href="#" onClick="loadOrgFromJSON(lastJSON);">Load last received organism</a><br/>
+		  <a href="#" onClick="getSelectedOrganism();">Use selected organism</a><br/>
+				  <a href="#" onClick="sendSelectedOrganism();">Send selected organism</a><br/>
       <applet id="breedOffspring" code="org.concord.otrunk.applet.OTAppletViewer"
 width="550" height="300"
 archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar
@@ -278,15 +303,13 @@ archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.j
 	<h1>Breeding Pool</h1>
 
 	<table summary="Breeding Pool">
-		<tr><th>Student</th><th>Color</th><th colspan="2">Gender</th><th>Horns</th><th>Wings</th><th>Legs</th><th>Tail</th><th>Fire</th></tr>
-		<tr id="Janet"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
-		<tr id="Chris_D"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
-		<tr id="Lynn"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
-		<tr id="Trish"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
-		<tr id="Mike"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
-		<tr id="Brad"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
-		<tr id="Jim"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>
-		<tr id="Karen"><td>-</td><td>-</td><td class="price">-</td><td class="arrow"></td><td class="change"></td><td class="use"></td></tr>		
+		<td width="400">
+		<input type="text" id="chatText" onkeypress="checkForEnter(event)">
+		<input type="button" value="Chat" onclick="chat()">
+		<input type="button" value="Send Current Child" onclick="test3()">
+
+		<div id="chatMessages"></div>
+		</td>		
 	</table>
 	</td>
   </tr>
@@ -337,7 +360,7 @@ archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.j
 	</script>
     </p>
 	      <applet id="multiOrg" code="org.concord.otrunk.applet.OTAppletViewer"
-	width="800" height="230"
+	width="400" height="450"
 	archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar
 	">
 	  <param name="url" value="multiOrg.otml"/>
@@ -347,14 +370,14 @@ archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.j
 	      </applet>
 	    </p>
 
-  <a href="#" onClick="test();">Test</a><br/>
+  <!--<a href="#" onClick="test();">Test</a><br/>
   <a href="#" onClick="test2();">Test2</a><br/>
-  <a href="#" onClick="test3();">Test3</a><br/>
-  <a href="#" onClick="saveCurrentOrganism();">Save current child</a><br/>
-  <a href="#" onClick="getSelectedOrganism();">Choose selected organism</a><br/>
-  <a href="#" onClick="loadOrgFromJSON(JSONTest);">Load from saved JSON</a><br/>
-  <a href="#" onClick="loadOrgFromJSON(lastJSON);">Load last received organism</a><br/>
-  <a href="#" onClick="loadFirstAlleleFromJSON(JSONTest);">Load first allele from JSON</a><br/>
+  <a href="#" onClick="test3();">Send Current Child</a><br/> -->
+
+
+  <a href="#" onClick="loadOrgFromJSON(JSONTest);">Load from saved JSON</a><br/> -->
+
+  <!--<a href="#" onClick="loadFirstAlleleFromJSON(JSONTest);">Load first allele from JSON</a><br/>
   <a href="#" onClick="testMessagePassing(this.recdMessage);">Show last message</a><br/>
 <div class="controls">
   <a href="javascript:breedOrganism();">breed new organism</a><br/>
@@ -362,26 +385,19 @@ archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.j
   <a href="javascript:breedAndNotify();">breed and notify</a><br/>
   <a href="javascript:loadAlleles();">load specified alleles</a><br/>
   <a href="javascript:getChromosomes();">get chromosome</a><br/>
-</div>
+</div> 
 <table width="900">
 	<td width="500">
 <div style="height: 5em;" id="child-info">
   Unknown child info...
 </div>
 </td>
-<td width="400">
-<input type="text" id="chatText" onkeypress="checkForEnter(event)">
-<input type="button" value="Chat" onclick="chat()">
-<input type="button" value="Send Current Organism" onclick="sendCurrentOrganism()">
-
-<div id="chatMessages"></div>
-</td>
-</table>
+</table> 
 
 <div id="dragonImages">
 	<img src="" name="imageReplace">
 </div>
-
+-->
 <script type="text/javascript">
 
 function chatUpdated(topic, data) {

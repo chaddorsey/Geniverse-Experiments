@@ -30,7 +30,7 @@
 			<OTViewEntry local_id="multiple-organism-view" objectClass="org.concord.otrunk.biologica.OTMultipleOrganism" viewClass="org.concord.otrunk.biologica.ui.OTMultipleOrganismView" nameTextVisible="false" />
           </viewEntries>
           <frame>
-            <OTFrame width="1100" height="260" />
+            <OTFrame width="500" height="400" />
           </frame>
         </OTViewBundle>
       </bundles>
@@ -48,7 +48,7 @@
                 </organism>
             </OTStaticOrganism>
             <OTChromosome local_id="chromosome"
-              name="chromosome" width="630" height="475">
+              name="chromosome" width="400" height="475">
               <organism>
                   <object refid="${maleOrganism}" />
               </organism>
@@ -72,7 +72,7 @@
             <OTWorld
               speciesPath="org/concord/biologica/worlds/dragon.xml"
               local_id="dragon_world" />
-			<OTMultipleOrganism local_id="multiOrg" name="multiOrg" width="300" height="150" organismImageSize="2" />
+			<OTMultipleOrganism local_id="multiOrg" name="multiOrg" width="500" height="390" organismImageSize="2" />
           </documentRefs>
         </OTCompoundDoc>
 
