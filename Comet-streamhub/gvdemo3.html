@@ -104,9 +104,10 @@
 		reloadApplet();
       }
 	function test3() {
-		var applet = getApplet("chromosome");
+		var applet = getApplet("breedOffspring");
 		//femaleOrg = getLocalObject("femaleOrganism");
-		currentOrg = getOrg();
+		var breedOffspringView = componentForObject("breedOffspring", "breedOffspring").getComponent(4);
+		currentOrg = breedOffspringView.getOrganism();
 		var org1 = new organism(currentOrg);
 		//org2 = new organism(maleOrg);
 		//org1.sex = femaleOrg.getSexAsString();
@@ -117,7 +118,7 @@
 		sendCurrentOrganism(JSONTest);
 	}
 	function getOrg(elementid, localId) {
-		var staticOrgView = componentForObject("chromosome","static");
+		var staticOrgView = componentForObject(elementid,localId);
         var org = staticOrgView.getOrganism();
 		return org;
 	}
@@ -151,12 +152,25 @@
 		var org = JSON.parse(orgJSON);
 		return org;
 	}
-	function loadAlleles(elementid, localId, org) {
+	function loadAlleles(org) {
 		//load chromosome A alleles
-		var applet = getApplet(elementid);
+		var applet = getApplet("breedOffspring");
         //staticOrg = getLocalObject("static");
         //chromosome = getLocalObject("chromosome");
-		var appletOrg = getOrg();
+		var breedOffspringFather = componentForObject("breedOffspring","breedOffspring").getComponent(5);
+		var breedOffspringChild = componentForObject("breedOffspring","breedOffspring").getComponent(4);
+		var breedOffspringMother = componentForObject("breedOffspring","breedOffspring").getComponent(3);
+		if (org.sex == "female") {
+			var appletOrg = breedOffspringMother.getOrganism();
+		}
+		else if (org.sex == "male") {
+			var appletOrg = breedOffspringFather.getOrganism();
+		}
+		else {
+			alert("Something seems fishy with the incoming organism data…")
+		}
+		
+		//var appletOrg = getOrg();
   		var chromA = org.chromosomeA;
 		for (var trait in chromA) {
 			//alert(trait + " = " + chromA[trait]);
@@ -181,11 +195,11 @@
 			appletOrg.setAllele(-91,trait,chromSexB[trait]);
 			//chromosome.setAllele(-91,trait,chromSexB[trait]);
 		} 
-		reloadApplet(elementid);
+		reloadApplet(breedOffspring);
 	}
-	function loadOrgFromJSON(elementid, localId, orgJSON) {
+	function loadOrgFromJSON(orgJSON) {
 		var org = recoverJSON(orgJSON);
-		loadAlleles(elementid, localId, org);
+		loadAlleles(org);
 	}
 	function loadFirstAlleleFromJSON(elementid, localId, orgJSON) {
 		var applet = getApplet(elementid);
@@ -271,8 +285,8 @@ archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.j
   <a href="#" onClick="test3();">Test3</a><br/>
   <a href="#" onClick="saveCurrentOrganism();">Save current child</a><br/>
   <a href="#" onClick="getSelectedOrganism();">Choose selected organism</a><br/>
-  <a href="#" onClick="loadOrgFromJSON('chromosome','static',JSONTest);">Load from saved JSON</a><br/>
-  <a href="#" onClick="loadOrgFromJSON('chromosome','static', lastJSON);">Load last received organism</a><br/>
+  <a href="#" onClick="loadOrgFromJSON(JSONTest);">Load from saved JSON</a><br/>
+  <a href="#" onClick="loadOrgFromJSON(lastJSON);">Load last received organism</a><br/>
   <a href="#" onClick="loadFirstAlleleFromJSON(JSONTest);">Load first allele from JSON</a><br/>
   <a href="#" onClick="testMessagePassing(this.recdMessage);">Show last message</a><br/>
 <div class="controls">
@@ -301,17 +315,14 @@ archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.j
 	<img src="" name="imageReplace">
 </div>
 
-
-
-
-<script>
+<script type="text/javascript">
 
 function chatUpdated(topic, data) {
   var div = document.createElement("DIV");
   div.innerHTML = data.client + ": " + data.message;
   document.getElementById('chatMessages').appendChild(div);
-  $.jGrowl(data.client + ": " + data.message);
-  lastJSON = data.message
+  //$.jGrowl(data.client + ": " + data.message);
+  lastJSON = data.message;
   //loadOrg(data.message);
   //TODO Figure this out
   //var orgStoredJSON = data.organism;
@@ -330,7 +341,7 @@ function sendCurrentOrganism(json) {
 	//var child = applet.getChildOrg();
     var jsonMessage = "{'message':'" + escapeQuotes(json) + "'}";
 	hub.publish("chat", jsonMessage);
-	var jsonOrganism = "{'organism':'" + json + "'}";
+	var jsonOrganism = "{'organism':'" + escapeQuotes(json) + "'}";
 	hub.publish("organism", jsonOrganism);
 }
 
