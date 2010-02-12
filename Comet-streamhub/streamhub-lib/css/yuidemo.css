@@ -1,0 +1,15 @@
+body, td, th {
+	font-family: sans-serif; 
+	font-size: 9pt;	
+}
+
+.right * {
+	text-align: right;
+}
+
+.yui-skin-sam .yui-dt td.up { 
+	background-color: #8f8; 
+} 
+.yui-skin-sam .yui-dt td.down { 
+	background-color: #f88; 
+}
