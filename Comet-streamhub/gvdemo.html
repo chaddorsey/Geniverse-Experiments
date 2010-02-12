@@ -202,12 +202,12 @@
 	function saveCurrentOrganism() {
 		var orgApplet = getApplet("chromosome");
 		var saveApplet = getApplet("multiOrg")
-		var multiOrgView = componentForObject("multiOrg","multipleOrganismView");
+		var multiOrgView = componentForObject("multiOrg","multiOrg");
 		saved_orgs= [];
 		var number_saved = saved_orgs.length;
 		//femaleOrg = getLocalObject("femaleOrganism");
 		currentOrg = getOrg("chromosome","static");
-		multiOrgView.addOrganism(currentOrg)
+		multiOrgView.getComponent(0).getComponent(0).addOrganism(currentOrg);
 		saved_orgs[number_saved-1]= new organism(currentOrg);
 		
 		JSONTest = JSON.stringify(currentOrg);
