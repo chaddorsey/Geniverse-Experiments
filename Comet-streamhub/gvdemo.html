@@ -104,7 +104,7 @@
 		reloadApplet();
       }
 	function test3() {
-		var applet = getApplet();
+		var applet = getApplet("chromosome");
 		//femaleOrg = getLocalObject("femaleOrganism");
 		currentOrg = getOrg();
 		org1 = new organism(currentOrg);
@@ -116,8 +116,8 @@
 		alert("JSON: " + JSONTest);
 		sendCurrentOrganism(JSONTest);
 	}
-	function getOrg() {
-		var staticOrgView = componentForObject("static");
+	function getOrg(elementid, localId) {
+		var staticOrgView = componentForObject("chromosome","static");
         var org = staticOrgView.getOrganism();
 		return org;
 	}
@@ -227,20 +227,21 @@
     <p>
 
       <applet id="chromosome" code="org.concord.otrunk.applet.OTAppletViewer"
-width="800" height="350"
+width="800" height="630"
 archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.jar, lib/frameworkview-0.1.0-SNAPSHOT2.jar, lib/jug-1.1.2-SNAPSHOT2.jar, lib/otrunk-0.1.1-SNAPSHOT2.jar, lib/otrunk-ui-0.1.0-SNAPSHOT2.jar, lib/swing-0.1.0-SNAPSHOT2.jar, lib/biologica-0.1.0-SNAPSHOT2.jar, lib/framework-0.1.0-SNAPSHOT2.jar, lib/jdom-1.0-SNAPSHOT2.jar, lib/loader-0.1.0-SNAPSHOT2.jar, lib/otrunk-biologica-0.1.0-SNAPSHOT2.jar, lib/response-cache-0.1.0-SNAPSHOT2.jar
 ">
   <param name="url" value="combined.otml"/>
   <param name="name" value="chromosome"/>
+  <param name="_master" value="chromosome"/>
         Your browser is completely ignoring the applet tag!
       </applet>
     </p>
-
   <a href="#" onClick="test();">Test</a><br/>
   <a href="#" onClick="test2();">Test2</a><br/>
   <a href="#" onClick="test3();">Test3</a><br/>
-  <a href="#" onClick="loadOrgFromJSON(JSONTest);">Load from saved JSON</a><br/>
-  <a href="#" onClick="loadOrgFromJSON(lastJSON);">Load last received organism</a><br/>
+  <a href="#" onClick="saveCurrentOrganism();">Save Current Organism</a><br/>
+  <a href="#" onClick="loadOrgFromJSON('chromosome','static',JSONTest);">Load from saved JSON</a><br/>
+  <a href="#" onClick="loadOrgFromJSON('chromosome','static', lastJSON);">Load last received organism</a><br/>
   <a href="#" onClick="loadFirstAlleleFromJSON(JSONTest);">Load first allele from JSON</a><br/>
   <a href="#" onClick="testMessagePassing(this.recdMessage);">Show last message</a><br/>
 <div class="controls">
