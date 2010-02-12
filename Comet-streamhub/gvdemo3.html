@@ -107,7 +107,7 @@
 		var applet = getApplet("chromosome");
 		//femaleOrg = getLocalObject("femaleOrganism");
 		currentOrg = getOrg();
-		org1 = new organism(currentOrg);
+		var org1 = new organism(currentOrg);
 		//org2 = new organism(maleOrg);
 		//org1.sex = femaleOrg.getSexAsString();
 		//org2.sex = maleOrg.getSexAsString();
@@ -210,24 +210,34 @@
 		var orgApplet = getApplet("breedOffspring");
 		var saveApplet = getApplet("multiOrg")
 		var breedOffspringView = componentForObject("breedOffspring", "breedOffspring").getComponent(4);
-		var multiOrgView = componentForObject("multiOrg","multiOrg");
+		var multiOrgView = componentForObject("multiOrg","multiOrg").getComponent(0).getComponent(0);
 		saved_orgs= [];
 		var number_saved = saved_orgs.length;
 		//femaleOrg = getLocalObject("femaleOrganism");
 		//currentOrg = getOrg("chromosome","static");
 		currentChild = breedOffspringView.getOrganism();
-		multiOrgView.getComponent(0).getComponent(0).addOrganism(currentChild);
-		saved_orgs[number_saved-1]= new organism(currentOrg);
-		
-		JSONTest = JSON.stringify(currentOrg);
-		alert("JSON: " + JSONTest);
-				
+		multiOrgView.addOrganism(currentChild);
+	}
+	function getSelectedOrganism() {
+		var orgApplet = getApplet("breedOffspring");
+		var breedOffspringFather = componentForObject("breedOffspring","breedOffspring").getComponent(3);
+		var breedOffspringChild = componentForObject("breedOffspring","breedOffspring").getComponent(4);
+		var breedOffspringMother = componentForObject("breedOffspring","breedOffspring").getComponent(5);
+		var multiOrgView = componentForObject("multiOrg", "multiOrg").getComponent(0).getComponent(0);
+		var selectionVector = [];
+		firstSelectedOrg = multiOrgView.getSelectionSet().getSelectedObjectAtIndex(0);
+
+		var org1 = new organism(firstSelectedOrg);
 		//org2 = new organism(maleOrg);
 		//org1.sex = femaleOrg.getSexAsString();
 		//org2.sex = maleOrg.getSexAsString();
-		//alert ("Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
-
-		//sendCurrentOrganism(JSONTest);	
+		alert ("Selected Org Name: " + org1.name + " Org Sex: " + org1.sex + " Alleles: " + org1.alleleString + " Horns allele A: " + org1.chromosomeA.Horns + " Horns allele B: " + org1.chromosomeB.Horns + " Color1 allele A: " + org1.chromosomeSexA.Color1 + " Color1 allele B: " + org1.chromosomeSexB.Color1);
+		JSONTest = JSON.stringify(org1);
+		alert("JSON: " + JSONTest);
+		sendCurrentOrganism(JSONTest);
+		//var numberSelected = selectionVector.getNumberOfSelectedObjects();
+		//var numberSelectedString = numberSelected+'';
+		//alert("Alleles: " + firstSelectedOrg.getAlleleString);
 	}
     </script>
   </head>
@@ -259,7 +269,8 @@ archive=" lib/apple-support-0.1.0-SNAPSHOT2.jar, lib/data-util-0.1.0-SNAPSHOT2.j
   <a href="#" onClick="test();">Test</a><br/>
   <a href="#" onClick="test2();">Test2</a><br/>
   <a href="#" onClick="test3();">Test3</a><br/>
-  <a href="#" onClick="saveCurrentOrganism();">Save Current Organism</a><br/>
+  <a href="#" onClick="saveCurrentOrganism();">Save current child</a><br/>
+  <a href="#" onClick="getSelectedOrganism();">Choose selected organism</a><br/>
   <a href="#" onClick="loadOrgFromJSON('chromosome','static',JSONTest);">Load from saved JSON</a><br/>
   <a href="#" onClick="loadOrgFromJSON('chromosome','static', lastJSON);">Load last received organism</a><br/>
   <a href="#" onClick="loadFirstAlleleFromJSON(JSONTest);">Load first allele from JSON</a><br/>
