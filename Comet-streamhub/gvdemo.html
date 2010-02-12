@@ -9,22 +9,22 @@
 	<script type="text/javascript" src="json2.js"></script>
 	<script type="text/javascript" src="chat-server.js"></script>
     <script type="text/javascript">
-      function getApplet() {
-        return document.getElementById("chromosome");
+      function getApplet(elementid) {
+        return document.getElementById(elementid);
       }
 
-      function getLocalObject(localId) {
-        var applet = getApplet();
+      function getLocalObject(elementid, localId) {
+        var applet = getApplet(elementid);
         return applet.getOTrunk().getOTObject(applet.getID(localId));
       }
 
-      function componentForObject(localId) {
-        var applet = getApplet();
-        var obj = getLocalObject(localId);
+      function componentForObject(elementid, localId) {
+        var applet = getApplet(elementid);
+        var obj = getLocalObject(elementid, localId);
         return applet.getOTContainer().getView().getJComponentService().getJComponentViewContext().getComponentByObject(obj);
       }
-      function reloadApplet() {
-        var applet = getApplet();
+      function reloadApplet(elementid) {
+        var applet = getApplet(elementid);
         applet.getOTContainer().reloadView();
       }
 	function organism(org) {
@@ -89,13 +89,13 @@
       // print the allele string
       function test() {
         // this should return a StaticOrganismView
-        var staticOrgView = componentForObject("static");
+        var staticOrgView = componentForObject("chromosome","static");
         org = staticOrgView.getOrganism();
         alert("Allele String: " + org.getAlleleString());
       }
       // change the current organism
       function test2() {
-        var applet = getApplet();
+        var applet = getApplet("chromosome");
         femaleOrg = getLocalObject("femaleOrganism");
         staticOrg = getLocalObject("static");
         chromosome = getLocalObject("chromosome");
@@ -151,9 +151,9 @@
 		var org = JSON.parse(orgJSON);
 		return org;
 	}
-	function loadAlleles(org) {
+	function loadAlleles(elementid, localId, org) {
 		//load chromosome A alleles
-		var applet = getApplet();
+		var applet = getApplet(elementid);
         //staticOrg = getLocalObject("static");
         //chromosome = getLocalObject("chromosome");
 		var appletOrg = getOrg();
@@ -181,15 +181,15 @@
 			appletOrg.setAllele(-91,trait,chromSexB[trait]);
 			//chromosome.setAllele(-91,trait,chromSexB[trait]);
 		} 
-		reloadApplet();
+		reloadApplet(elementid);
 	}
-	function loadOrgFromJSON(orgJSON) {
+	function loadOrgFromJSON(elementid, localId, orgJSON) {
 		var org = recoverJSON(orgJSON);
-		loadAlleles(org);
+		loadAlleles(elementid, localId, org);
 	}
-	function loadFirstAlleleFromJSON(orgJSON) {
-		var applet = getApplet();
-		var appletOrg = getOrg();
+	function loadFirstAlleleFromJSON(elementid, localId, orgJSON) {
+		var applet = getApplet(elementid);
+		var appletOrg = getOrg(elementid, localId);
        	//staticOrg = getLocalObject("static");
 		var org = recoverJSON(orgJSON);
   		var chromA = org.chromosomeA;
