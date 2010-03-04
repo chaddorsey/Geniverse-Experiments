@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Many Views Demo</title>
+<link rel="stylesheet" href="jquery.jgrowl.css" type="text/css" />
+<script type="text/javascript" src="biologica-library.js"></script>
+<script type="text/javascript" src="jquery-1.4.js"></script>
+<script type="text/javascript">
+//$(document).ready(function() {
+var multi_org_applet = document.getElementById("multi-org-applet");
+function createNewOrganism(){
+	document.getElementById("multi-org-applet").addNewOrganism("test");
+}
+</script>
+</head>
+<body>
+<h1>Many Views Demo</h1>
+<table>
+	<tr>
+		<td>
+			<div style="border: 1px solid black;">
+			<applet id="multi-org-applet" code="org/concord/biologica/applet/MultipleOrganismApplet.class"
+			    archive="http://jnlp.concord.org/dev/org/concord/biologica-applets/biologica-applets-0.1.0-SNAPSHOT.jar, http://jnlp.concord.org/dev/org/concord/biologica/biologica-0.1.0-SNAPSHOT.jar, lib/jna-jnidispatch-3.0.9-macosx.nar, lib/libjri-0.4-1-SNAPSHOT.jar, lib/bsf-2.4.0.jar, lib/jna-jnidispatch-3.0.9-win32.nar, lib/libjri-native-osx-0.4-1-SNAPSHOT-macosx.nar, lib/commons-logging-1.0.4.jar, lib/jna-jws-3.0.9.jar, lib/loader-0.1.0-SNAPSHOT.jar, lib/framework-0.1.0-SNAPSHOT.jar, lib/jna-examples-0.1.0-SNAPSHOT.jar, lib/js-1.6R5.jar"
+			    width="550" height="280">
+			    Your browser is completely ignoring the applet tag!
+			  </applet>
+			</div>
+			<a href="javascript:createNewOrganism();">create new organism</a><br/>
+		</td>
+		<td>
+			<a href="javascript:transferSelectedOrganismsAsCopies('multi-org-applet', 'pedigree-applet');">-&gt;</a><br/>
+			<a href="javascript:transferSelectedOrganismsAsCopies('pedigree-applet', 'multi-org-applet');">&lt;-</a>
+		</td>
+		<td>
+			<applet id="pedigree-applet" code="org/concord/biologica/applet/PedigreeApplet.class"
+			    archive="http://jnlp.concord.org/dev/org/concord/biologica-applets/biologica-applets-0.1.0-SNAPSHOT.jar, http://jnlp.concord.org/dev/org/concord/biologica/biologica-0.1.0-SNAPSHOT.jar, lib/jna-jnidispatch-3.0.9-macosx.nar, lib/libjri-0.4-1-SNAPSHOT.jar, lib/bsf-2.4.0.jar, lib/jna-jnidispatch-3.0.9-win32.nar, lib/libjri-native-osx-0.4-1-SNAPSHOT-macosx.nar, lib/commons-logging-1.0.4.jar, lib/jna-jws-3.0.9.jar, lib/loader-0.1.0-SNAPSHOT.jar, lib/framework-0.1.0-SNAPSHOT.jar, lib/jna-examples-0.1.0-SNAPSHOT.jar, lib/js-1.6R5.jar"
+			    width="550" height="280">
+			    Your browser is completely ignoring the applet tag!
+			  </applet>
+		</td>
+	</tr>
+	<tr>
+		<td style="text-align: center;">
+			<a href="javascript:transferSelectedOrganismsAsCopies('multi-org-applet', 'static-org-applet');">v</a>
+			<a href="javascript:transferSelectedOrganismsAsCopies('static-org-applet', 'multi-org-applet');">^</a>
+		</td>
+		<td>
+		</td>
+		<td style="text-align: center;">
+			<a href="javascript:transferSelectedOrganismsAsCopies('pedigree-applet', 'breed-applet');">v</a>
+			<a href="javascript:transferSelectedOrganismsAsCopies('breed-applet', 'pedigree-applet');">^</a>
+		</td>	
+	</tr>
+	<tr>
+		<td>
+			<div style="border: 1px solid black;">
+			<applet id="static-org-applet" code="org/concord/biologica/applet/StaticOrganismApplet.class"
+			    archive="http://jnlp.concord.org/dev/org/concord/biologica-applets/biologica-applets-0.1.0-SNAPSHOT.jar, http://jnlp.concord.org/dev/org/concord/biologica/biologica-0.1.0-SNAPSHOT.jar, lib/jna-jnidispatch-3.0.9-macosx.nar, lib/libjri-0.4-1-SNAPSHOT.jar, lib/bsf-2.4.0.jar, lib/jna-jnidispatch-3.0.9-win32.nar, lib/libjri-native-osx-0.4-1-SNAPSHOT-macosx.nar, lib/commons-logging-1.0.4.jar, lib/jna-jws-3.0.9.jar, lib/loader-0.1.0-SNAPSHOT.jar, lib/framework-0.1.0-SNAPSHOT.jar, lib/jna-examples-0.1.0-SNAPSHOT.jar, lib/js-1.6R5.jar"
+			    width="550" height="280">
+			    Your browser is completely ignoring the applet tag!
+			  </applet>
+			</div>
+		</td>
+		<td>
+			<a href="javascript:transferSelectedOrganismsAsCopies('static-org-applet', 'breed-applet');">-&gt;</a><br/>
+			<a href="javascript:transferSelectedOrganismsAsCopies('breed-applet', 'static-org-applet');">&lt;-</a>
+		</td>
+		<td>
+			<applet id="breed-applet" code="org/concord/biologica/applet/BreedOffspringApplet.class"
+			    archive="http://jnlp.concord.org/dev/org/concord/biologica-applets/biologica-applets-0.1.0-SNAPSHOT.jar, http://jnlp.concord.org/dev/org/concord/biologica/biologica-0.1.0-SNAPSHOT.jar, lib/jna-jnidispatch-3.0.9-macosx.nar, lib/libjri-0.4-1-SNAPSHOT.jar, lib/bsf-2.4.0.jar, lib/jna-jnidispatch-3.0.9-win32.nar, lib/libjri-native-osx-0.4-1-SNAPSHOT-macosx.nar, lib/commons-logging-1.0.4.jar, lib/jna-jws-3.0.9.jar, lib/loader-0.1.0-SNAPSHOT.jar, lib/framework-0.1.0-SNAPSHOT.jar, lib/jna-examples-0.1.0-SNAPSHOT.jar, lib/js-1.6R5.jar"
+			    width="550" height="280">
+			    Your browser is completely ignoring the applet tag!
+			  </applet>
+		</td>
+	</tr>
+</table>
+
+
+</body>
+</html>
