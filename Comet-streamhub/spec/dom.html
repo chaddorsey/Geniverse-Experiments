@@ -1,17 +1,19 @@
 <html>
 	<head>
 		<link type="text/css" rel="stylesheet" href="./lib/jspec.css" />
+		<script src="./support/jquery.js"></script>
+		
 		<script src="./lib/jspec.js"></script>
 		<script src="./lib/jspec.xhr.js"></script>
 		<script src="./lib/jspec.jquery.js"></script>
-		<script src="./support/jquery.js"></script>
+		
 		<script src="../biologica-library.js"></script>
 		<script src="unit/spec.helper.js"></script>
 		<script>
 			function runSuites() {
 				JSpec
 				.exec('unit/spec.js')
-				.run({ fixturePath: 'fixtures' })
+				.run({ fixturePath: 'fixtures', verbose: 'true' })
 				.report()
 			}
 		</script>
