@@ -14,7 +14,7 @@ describe 'Biologica Library'
 	it 'should fail to add an organism an invalid organism to the applet'
 		addAppletFromFixture(fixture('multiple-organism-applet'))
 		applet = document.getElementById("multi-org-applet")
-     applet.addNewOrganism("bogus", 10)
+      applet.addNewOrganism("bogus", 10)
 	  org = applet.getOrganisms()
 	  org.length.should.be 0
     end
@@ -55,6 +55,19 @@ describe 'Biologica Library'
 		var characteristic = org.getCharacteristicOfTrait("Horns")
 		var name = characteristic.getName();
 		name.should.be "No Horns"
+	end
+	it 'should be able to create copies of organisms'
+		addAppletFromFixture(fixture('multiple-organism-applet') + fixture('static-organism-applet'))
+		multiOrgApplet = document.getElementById("multi-org-applet")
+		staticApplet = document.getElementById("static-org-applet")
+		var org = multiOrgApplet.addNewOrganism("test")
+		var orgFromMulti = multiOrgApplet.getOrganisms()
+		orgFromMulti.length.should.be 1
+		addOrganismsAsCopies("static-org-applet", orgFromMulti)
+		var newOrg = getOrganisms("static-org-applet")
+		newOrg.should_not.be_null
+		newOrg.length.should.be 1
+		orgFromMulti[0].should_not.be newOrg[0]
 	end
   end
 end
