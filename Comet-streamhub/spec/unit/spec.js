@@ -4,7 +4,9 @@ describe 'Biologica Library'
     it 'should add an organism to the applet'
 			$(applets).append(fixture('multiple-organism-applet'))
 			applet = document.getElementById("multi-org-applet")
-      applet.addNewOrganism("test")
+      applet.addNewOrganism("abc")
+	  org = applet.getOrganisms()[0]
+	  org.getName().should.be 'abc'
     end
     it 'should not get an organism'
       orgs = getSelectedOrganisms("multi-org-applet")
