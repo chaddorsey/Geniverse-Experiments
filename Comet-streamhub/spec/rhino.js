@@ -1,7 +1,7 @@
 
 load('/opt/local/lib/ruby/gems/1.8/gems/jspec-3.3.2/lib/jspec.js')
 load('/opt/local/lib/ruby/gems/1.8/gems/jspec-3.3.2/lib/jspec.xhr.js')
-load('lib/biologica-library.js')
+load('biologica-library.js')
 load('spec/unit/spec.helper.js')
 
 JSpec
