@@ -1,6 +1,8 @@
 
 describe 'Biologica Library'
-	
+  after_each
+	document.getElementById("applets").innerHTML = ""
+  end
   describe '.getSelectedOrganisms(appletId)'
     it 'should add an organism to the applet'
 		addAppletFromFixture(fixture('multiple-organism-applet'))
@@ -17,6 +19,7 @@ describe 'Biologica Library'
 	  org.length.should.be 0
     end
     it 'should not get an organism'
+		addAppletFromFixture(fixture('multiple-organism-applet'))
       orgs = getSelectedOrganisms("multi-org-applet")
       orgs.should_not.be_null
 			orgs.length.should.be 0
