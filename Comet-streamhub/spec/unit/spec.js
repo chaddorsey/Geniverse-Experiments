@@ -47,5 +47,14 @@ describe 'Biologica Library'
 		}
 		containsOrg.should.be true
     end
+	it 'should be able to create an organism from allele string'
+		addAppletFromFixture(fixture('static-organism-applet'))
+		applet = document.getElementById("static-org-applet")
+		var org = applet.createOrganismWithAlleleString("a:h,b:h")
+		org.should_not.be_null
+		var characteristic = org.getCharacteristicOfTrait("Horns")
+		var name = characteristic.getName();
+		name.should.be "No Horns"
+	end
   end
 end
