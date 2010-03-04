@@ -8,17 +8,17 @@ describe 'Biologica Library'
 		addAppletFromFixture(fixture('multiple-organism-applet'))
 		applet = document.getElementById("multi-org-applet")
       applet.addNewOrganism("abc")
-	  org = applet.getOrganisms()[0]
+	  org = getOrganisms("multi-org-applet")[0]
 	  org.getName().should.be 'abc'
     end
-	it 'should fail to add an organism an invalid organism to the applet'
+	it 'should fail to add an invalid organism to the applet'
 		addAppletFromFixture(fixture('multiple-organism-applet'))
 		applet = document.getElementById("multi-org-applet")
       applet.addNewOrganism("bogus", 10)
 	  org = applet.getOrganisms()
 	  org.length.should.be 0
     end
-    it 'should not get an organism'
+    it 'should not get any organism from a newly-created multi-org-applet'
 		addAppletFromFixture(fixture('multiple-organism-applet'))
       orgs = getSelectedOrganisms("multi-org-applet")
       orgs.should_not.be_null
@@ -33,11 +33,10 @@ describe 'Biologica Library'
 	it 'should transfer an organism between two applets'
 		addAppletFromFixture(fixture('multiple-organism-applet') + fixture('breed-offspring-applet'))
 		multiOrgApplet = document.getElementById("multi-org-applet")
-		breedApplet = document.getElementById("breed-applet")
 		multiOrgApplet.addNewOrganism("abc")
 		orgs = multiOrgApplet.getOrganisms()
-		breedApplet.addOrganisms(orgs)
-		breedAppletOrgs = breedApplet.getOrganisms()
+		addOrganisms("breed-applet", orgs)
+		breedAppletOrgs = getOrganisms("breed-applet")
 		breedAppletOrgs.should_not.be_null
 		var containsOrg = false
 		for (var i = 0; i < breedAppletOrgs.length; i++){
@@ -49,8 +48,7 @@ describe 'Biologica Library'
     end
 	it 'should be able to create an organism from allele string'
 		addAppletFromFixture(fixture('static-organism-applet'))
-		applet = document.getElementById("static-org-applet")
-		var org = applet.createOrganismWithAlleleString("a:h,b:h")
+		var org = createOrganismWithAlleleString("static-org-applet", "a:h,b:h")
 		org.should_not.be_null
 		var characteristic = org.getCharacteristicOfTrait("Horns")
 		var name = characteristic.getName();

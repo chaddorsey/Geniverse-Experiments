@@ -1,3 +1,7 @@
+function createOrganismWithAlleleString(appletId, string){
+	return document.getElementById(appletId).createOrganismWithAlleleString(string)
+}
+
 function getSelectedOrganisms(appletId){
 	return document.getElementById(appletId).getSelectedOrganisms();
 }
